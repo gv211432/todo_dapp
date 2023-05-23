@@ -3,8 +3,9 @@ import OvalBag from "../../../assets/Oval_bag.png";
 import EditPen from "../../../assets/edit_pen.png";
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function ShowTodo() {
+export default function ShowTodo({ title, description, completed }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
@@ -28,7 +29,15 @@ export default function ShowTodo() {
             style={{
               backgroundColor: "#30343d"
             }}
-            onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
+            onClick={() => {
+              dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
+              dispatch(setExtra({
+                key: "right_data", val: {
+                  type: "todo",
+                  data: { title, description, completed }
+                }
+              }));
+            }}
           />
         </div>
         <h5 className="card-title text-start" style={
@@ -42,7 +51,9 @@ export default function ShowTodo() {
           }
         }>
           <img src={OvalBag} alt="oval_bag" className='me-2' height={30} />
-          Carrot
+          <span className='ps-1'>
+            {title}
+          </span>
         </h5>
         <h6 className="card-subtitle"
           style={
@@ -55,8 +66,17 @@ export default function ShowTodo() {
               color: '#808191'
             }
           }>
-          Incididunt ex sint enim esse dolore velit dolore ea quis exercitation excepteur.
+          {description}
         </h6>
+        {completed && <div style={{ position: "absolute", right: "0.8rem", bottom: "0.4rem" }} >
+          <FontAwesomeIcon
+            width={20}
+            height={20}
+            color='#fff'
+            className='text-success'
+            icon="fa-solid fa-check"
+          />
+        </div>}
       </div>
     </div>);
 }

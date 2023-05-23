@@ -1,55 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LeftRightBars from '../../components/LeftRightBars';
-import { selectDarkMode } from '../../features/state/gobalState';
-import { useSelector } from 'react-redux';
-import CloseArrow from "../../assets/close_arrow.png";
-import ShowTodo from './components/ShowTodo';
-import ShowList from './components/ShowList';
-import AddTodo from './components/AddTodo';
-import DesktopDisplay from './components/DesktopDisp';
+import { selectDarkMode, setExtra } from '../../features/state/gobalState';
+import { useDispatch, useSelector } from 'react-redux';
+import DesktopDisplay from './components/DesktopDisplay';
 import MobileDisplay from './components/MobileDisplay';
-import EditList from './components/EditList';
-import EditTodo from './components/EditTodo';
+import connetWallet from '../../helpers/conectWallet';
+import RightSection from './components/RightSection';
 
 export default function Section1() {
   const darkMode = useSelector(selectDarkMode);
+  const dispatch = useDispatch();
+
+  // const ether = useSelector(selectEther);
+  const [ether, setEther] = useState(null);
+
+  const connect = async () => {
+    const e = await connetWallet();
+    setEther(e);
+    const lists = await e?.contract?.getUserIds();
+    const todos = await e?.contract?.getTodos(e?.signer?.address);
+    console.log("List :", (await lists));
+    console.log("Todos :", (await todos));
+
+    for (const list of (await lists)) {
+      console.log({ list });
+    }
+
+    const allTodos = [];
+    for (const manyTodos of JSON.parse(JSON.stringify((await todos)))) {
+      allTodos.push({
+        list_name: manyTodos[0],
+        data: manyTodos[1]?.map(t => ({
+          index: t[0],
+          title: t[1],
+          desc: t[2],
+          done: t[3],
+        }))
+      });
+    }
+    dispatch(setExtra({ key: "list_data", val: allTodos }));
+  };
+
+  useEffect(() => { connect(); }, []);
 
   const mainComponent = () => {
+    // console.log({ ether });
     return <>
-
       <MobileDisplay />
-
       <DesktopDisplay />
-
     </>;
   };
-  const rightComponent = () => {
-    return <div className='text-start pt-2 '>
-      <img
-        src={CloseArrow}
-        alt="close"
-        className={`me-2 p-1 basic-icons ${!darkMode && "img-i"}`}
-        height={20}
-        style={{}}
-      />
-      <span className='txt'
-        style={{
-          color: !darkMode ? "#242731" : "#fff",
-          verticalAlign: "middle"
-        }}>
-        Edit Todo
-      </span>
-      {/* edit title */}
 
-      <EditList />
-      <EditTodo />
-
-    </div>;
-  };
   return (
     <LeftRightBars
       mainComponent={mainComponent()}
-      rightComponent={rightComponent()}
+      rightComponent={<RightSection />}
     />
   );
 };

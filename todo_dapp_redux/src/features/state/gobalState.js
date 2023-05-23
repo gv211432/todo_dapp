@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ether: 0,
-  darkMode: false,
+  ether: null,
+  darkMode: true,
 };
 
 export const globlaState = createSlice({

@@ -2,13 +2,13 @@ import React from 'react';
 import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
 
-export default function EditList() {
+export default function EditList({ state, setState }) {
   const darkMode = useSelector(selectDarkMode);
 
   return (
     <div className="row m-1" style={{
       verticalAlign: "middle",
-      maxWidth:"16rem", minWidth:"10rem",
+      maxWidth: "16rem", minWidth: "10rem",
     }} >
       <div className=""
         style={
@@ -24,19 +24,28 @@ export default function EditList() {
           }
         }
       >
-        <h5 className="card-title"
+        <textarea className="card-title"
           style={
             {
               fontFamily: '\'Inter\'',
               fontStyle: 'normal',
               fontWeight: '700',
               fontSize: '16px',
+              width: "inherit",
+              border: "0px",
+              resize: "none",
               letterSpacing: '1px',
               color: darkMode ? '#FFFFFF' : "#242731",
-              paddingBottom: "1.0rem"
+              background: darkMode ? '#242731' : "#c9c9c9",
+              outline: "none",
+              // paddingBottom: "1.0rem"
             }
           }
-        >List : Things to buy</h5>
+          value={state?.title}
+          onChange={e => {
+            setState(p => ({ ...p, title: e.target.value }));
+          }}
+        />
       </div>
     </div>
 

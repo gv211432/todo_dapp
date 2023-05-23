@@ -2,13 +2,13 @@ import React from 'react';
 import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
 
-export default function EditTodo() {
+export default function EditTodo({ state, setState }) {
   const darkMode = useSelector(selectDarkMode);
 
   return (
     <div className="row m-1" style={{
       verticalAlign: "middle",
-      maxWidth:"16rem", minWidth:"10rem",
+      maxWidth: "16rem", minWidth: "10rem",
     }} >
       <div className=""
         style={
@@ -22,9 +22,12 @@ export default function EditTodo() {
           }
         }
       >
-        <textarea className="card-title"
+        <textarea
+          className="card-title"
+          rows={5}
           style={
             {
+              overflowY: "auto",
               fontFamily: '\'Inter\'',
               fontStyle: 'normal',
               fontWeight: '500',
@@ -35,10 +38,14 @@ export default function EditTodo() {
               background: darkMode ? "#191B20" : "#ddd",
               border: "0px",
               width: "100%",
+              resize: "none",
               outline: "none"
             }
           }
-          value={"List : Things to buy"}
+          value={state?.body}
+          onChange={e => {
+            setState(p => ({ ...p, body: e?.target?.value }));
+          }}
         ></textarea>
       </div>
     </div>

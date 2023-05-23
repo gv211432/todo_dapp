@@ -1,18 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function ShowList() {
+export default function ShowList({ title, ...rest }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
 
   return (
-    <div className="row m-1" style={{
-      verticalAlign: "middle",
-      maxWidth: "16rem", minWidth: "10rem",
-    }} >
+    <div className="row m-1"
+      rest
+      style={{
+        verticalAlign: "middle",
+        maxWidth: "16rem", minWidth: "10rem",
+      }} >
       <div className="basic-cards"
         onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
         style={
@@ -28,25 +29,6 @@ export default function ShowList() {
           }
         }
       >
-        {/* <div
-          style={{
-            position: "absolute",
-            right: "0.3rem",
-            top: "0.4rem",
-            backgroundColor: "#30343d",
-            height: "1.8rem",
-            width: "1.8rem"
-          }}
-          className='basic-icons rounded rounded-circle'
-        >
-          <FontAwesomeIcon
-            width={15}
-            height={15}
-            color='#ddd'
-            icon="fa-solid fa-trash"
-          />
-        </div> */}
-
         <h5 className="card-title"
           style={
             {
@@ -59,7 +41,7 @@ export default function ShowList() {
               paddingBottom: "1.0rem"
             }
           }
-        >List : Things to buy amnalfalj afkdja adifjjaojjaowe eoe w</h5>
+        >List : {title}</h5>
       </div>
     </div>
   );
