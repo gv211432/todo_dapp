@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+.fade-text {
+  font-family: 'Inter';
+  color: #808191;
+  border-radius: 12px;
+}
+
+.left-fixed-bax {
+  width: 6rem;
+}
+
+.fade-text:hover {
+  background: #353945;
+  mix-blend-mode: normal;
+  border-radius: 12px;
+  color: #fff
+}
+
+.fade-text-light {
+  font-family: 'Inter';
+  color: #808191;
+  border-radius: 12px;
+}
+
+.fade-text-light:hover {
+  border: 1px solid #35394566;
+  background: #ddd;
+  mix-blend-mode: normal;
+  border-radius: 12px;
+  color: #353945d9;
+  font-weight: 600;
+}
+
+.txt {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.basic-icons:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.basic-cards:hover {
+  transform: scale(1.04);
+  cursor: pointer;
+}
+
+/* The animation code */
+@keyframes toggleon {
+  from {
+    margin: 0.2rem 1.6rem auto -1.6rem;
+  }
+
+  to {
+    margin: 0.2rem auto auto auto;
+  }
+}
+
+/* The animation code */
+@keyframes toggleoff {
+  from {
+    margin: 0.2rem auto auto auto;
+  }
+
+  to {
+    margin: 0.2rem 1.6rem auto -1.6rem;
+  }
+}
+
+.dark-btn-on {
+  animation-name: toggleon;
+  animation-duration: 0s;
+  animation-play-state: running;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.dark-btn-off {
+  animation-name: toggleoff;
+  animation-duration: 0s;
+  animation-play-state: running;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.img-i {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+
+.img-r {
+  rotate: 180deg;
+  color: #8585855a;
+}
+
+.left-drawer {
+  box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
+}
