@@ -88,8 +88,8 @@ function App() {
   }, [state]);
 
   return (
-    // <Home />
-    <Section1 />
+    <Home />
+    // <Section1 />
   );
 }
 

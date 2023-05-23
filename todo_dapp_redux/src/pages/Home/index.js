@@ -1,58 +1,27 @@
 import React from 'react';
 import LeftRightBars from '../../components/LeftRightBars';
-import CloseArrow from "../../assets/close_arrow.png";
-import { useSelector } from 'react-redux';
 import { selectDarkMode } from '../../features/state/gobalState';
-import AddTodo from './components/AddTodo';
+import { useSelector } from 'react-redux';
+import CloseArrow from "../../assets/close_arrow.png";
 import ShowTodo from './components/ShowTodo';
 import ShowList from './components/ShowList';
-import AddList from './components/AddList';
-import EditTodo from './components/EditTodo';
+import AddTodo from './components/AddTodo';
+import DesktopDisplay from './components/DesktopDisp';
+import MobileDisplay from './components/MobileDisplay';
 import EditList from './components/EditList';
+import EditTodo from './components/EditTodo';
 
-export default function Home() {
+export default function Section1() {
   const darkMode = useSelector(selectDarkMode);
 
   const mainComponent = () => {
-    return <div>
-      <div className='row' >
-        {/* list one */}
-        <div className='col-lg-4 col-md-6 col-sm-6 overflow-y-scroll'
-          style={{
-            // overflowY: "scroll"
-          }}
-        >
-          <ShowList />
-          <AddTodo />
-          <ShowTodo />
-          <ShowTodo />
-          <ShowTodo />
+    return <>
 
-        </div>
+      <MobileDisplay />
 
-        {/* list two */}
-        <div className='col-lg-4 col-md-6 col-sm-6'
-          style={{
-            // overflowY: "scroll"
-          }}
-        >
-          <ShowList />
-          <AddTodo />
-          <ShowTodo />
+      <DesktopDisplay />
 
-        </div>
-
-        {/* list three */}
-        <div className='col-lg-4 col-md-6 col-sm-6'
-          style={{
-            // overflowY: "scroll"
-          }}
-        >
-          <AddList />
-        </div>
-
-      </div>
-    </div>;
+    </>;
   };
   const rightComponent = () => {
     return <div className='text-start pt-2 '>
@@ -77,14 +46,10 @@ export default function Home() {
 
     </div>;
   };
-
-
   return (
-    <>
-      <LeftRightBars
-        mainComponent={mainComponent()}
-        rightComponent={rightComponent()}
-      />
-    </>
+    <LeftRightBars
+      mainComponent={mainComponent()}
+      rightComponent={rightComponent()}
+    />
   );
-}
+};

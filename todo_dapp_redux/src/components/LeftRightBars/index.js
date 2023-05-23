@@ -265,7 +265,7 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
             </div>
             <div className='row' style={{ height: "100%" }}>
               {/* main of main right section */}
-              <div className='col' style={{
+              <div className='col-lg-9 col-md-8 col-sm-12' style={{
                 height: "100%",
                 backgroundColor: darkMode ? "#1E1E1E" : "#eee",
               }}>
