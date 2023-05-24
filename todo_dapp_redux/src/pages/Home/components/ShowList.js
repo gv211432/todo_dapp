@@ -1,14 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
-
+import { motion } from 'framer-motion';
 export default function ShowList({ title, ...rest }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
 
   return (
-    <div className="row m-1"
+    <motion.div
+      animate={{
+        scale: [0.7, 1]
+      }}
+      className="row m-1"
       rest
       style={{
         verticalAlign: "middle",
@@ -43,6 +47,6 @@ export default function ShowList({ title, ...rest }) {
           }
         >List : {title}</h5>
       </div>
-    </div>
+    </motion.div>
   );
 }

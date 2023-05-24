@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import OvalBag from "../../../assets/Oval_bag.png";
 import EditPen from "../../../assets/edit_pen.png";
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from "framer-motion";
 
-export default function ShowTodo({ title, description, completed }) {
+export default function ShowTodo({ title, description, completed, index }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
+  const isSelected = useMemo(() => {
+    if (extra?.right_data && extra?.right_data?.type === "todo") {
+      console.log("Cheking=>", extra?.right_data);
+      if (extra?.right_data?.data?.index == index) return true;
+    }
+    return false;
+  }, [extra]);
+
+  console.log({ isSelected });
 
   return (
-    <div className="row m-1"
+    <motion.div
+      animate={{
+        scale: [0.7, 1]
+      }}
+      className={`row m-1 ${isSelected ? "show-todos" : ""}`}
       style={{
         maxWidth: "16rem", minWidth: "10rem",
       }}>
@@ -23,6 +37,18 @@ export default function ShowTodo({ title, description, completed }) {
           position: "relative"
         }}
       >
+        {/* <div
+          style={
+            {
+              width: '4px',
+              // height: '102px',
+              background: '#000AFF',
+              boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+              borderRadius: '16px',
+              marginLeft: "-28.6rem"
+            }}
+        >
+        </div> */}
         <div style={{ position: "absolute", right: "0.3rem", top: "0.4rem" }} >
           <img src={EditPen} alt="oval_bag"
             className='me-2 rounded rounded-circle basic-icons' height={30}
@@ -34,7 +60,7 @@ export default function ShowTodo({ title, description, completed }) {
               dispatch(setExtra({
                 key: "right_data", val: {
                   type: "todo",
-                  data: { title, description, completed }
+                  data: { title, description, completed, index }
                 }
               }));
             }}
@@ -78,5 +104,5 @@ export default function ShowTodo({ title, description, completed }) {
           />
         </div>}
       </div>
-    </div>);
+    </motion.div>);
 }

@@ -56,7 +56,7 @@ export default function DesktopDisplay() {
               <AddTodo list={list} />
               {list?.data?.map((todo, j) => {
                 return <ShowTodo title={todo?.title} description={todo?.desc}
-                  completed={todo?.done}
+                  completed={todo?.done} index={todo?.index}
                 />;
               })}
               <br />

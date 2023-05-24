@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import OvalBag from "../../../assets/Oval_bag.png";
 import PlusIcon from "../../../assets/plus.png";
-
+import { motion } from 'framer-motion';
 
 export default function AddTodo({ list }) {
   const darkMode = useSelector(selectDarkMode);
@@ -11,7 +11,11 @@ export default function AddTodo({ list }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="row m-1"
+    <motion.div
+      animate={{
+        scale: [0.7, 1]
+      }}
+      className="row m-1"
       style={{ maxWidth: "16rem", minWidth: "10rem" }}
     >
       <div className="card-body"
@@ -69,6 +73,6 @@ export default function AddTodo({ list }) {
           Add todo description
         </h6>
       </div>
-    </div>
+    </motion.div>
   );
 }

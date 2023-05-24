@@ -1,15 +1,20 @@
 import React from 'react';
 import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 
 export default function EditTodo({ state, setState, placeholder, style }) {
   const darkMode = useSelector(selectDarkMode);
 
   return (
-    <div className="row m-1" style={{
-      verticalAlign: "middle",
-      maxWidth: "16rem", minWidth: "10rem",
-    }} >
+    <motion.div
+      animate={{
+        scale: [0.7, 1]
+      }}
+      className="row m-1" style={{
+        verticalAlign: "middle",
+        maxWidth: "16rem", minWidth: "10rem",
+      }} >
       <div className=""
         style={
           {
@@ -50,6 +55,6 @@ export default function EditTodo({ state, setState, placeholder, style }) {
           }}
         ></textarea>
       </div>
-    </div>
+    </motion.div>
   );
 }

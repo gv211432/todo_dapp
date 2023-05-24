@@ -45,7 +45,10 @@ export default function LangAndDarkBtn({
             className={darkMode
               ? "basic-icons dark-btn-on"
               : "basic-icons dark-btn-off"}
-            onClick={() => dispatch(toggelDarkMode())}
+            onClick={() => {
+              window.localStorage.setItem("darkmode", darkMode ? "0" : "1");
+              dispatch(toggelDarkMode());
+            }}
           />
         </span>
       </div>

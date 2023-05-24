@@ -2,8 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   ether: null,
-  darkMode: true,
+  darkMode: false,
 };
+try {
+  initialState.darkMode = parseInt(window.localStorage.getItem("darkmode")) || false;
+} catch (error) { }
 
 export const globlaState = createSlice({
   name: 'globalState',
