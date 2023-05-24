@@ -160,9 +160,11 @@ export default function Section1() {
     </div>;
   };
   return (
-    <LeftRightBars
-      mainComponent={mainComponent()}
-      rightComponent={rightComponent()}
-    />
+    <div style={{ height: "100vh" }}>
+      <LeftRightBars
+        mainComponent={mainComponent()}
+        rightComponent={rightComponent()}
+      />
+    </div>
   );
 };

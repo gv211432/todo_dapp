@@ -13,7 +13,7 @@ export default function LangAndDarkBtn({
 
   return (
     <div
-      className='text-start d-sm-block d-md-block ms-3 text-sm-center'
+      className='text-start d-sm-block d-md-block ms-3 mb-3 text-sm-center'
       style={{ marignTop: "" }} >
       <img src={LangIcon} height={26} width={26}
         alt="home"

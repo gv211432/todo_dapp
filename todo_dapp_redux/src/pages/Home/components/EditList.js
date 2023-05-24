@@ -2,7 +2,7 @@ import React from 'react';
 import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
 
-export default function EditList({ state, setState }) {
+export default function EditList({ state, setState, placeholder, style }) {
   const darkMode = useSelector(selectDarkMode);
 
   return (
@@ -10,37 +10,24 @@ export default function EditList({ state, setState }) {
       verticalAlign: "middle",
       maxWidth: "16rem", minWidth: "10rem",
     }} >
-      <div className=""
+      <div className="edit-list-card"
         style={
           {
             background: darkMode ? '#242731' : "#8585855a",
-            mixBlendMode: 'normal',
-            borderRadius: '12px',
-            minHeight: "4rem",
-            verticalAlign: "middle",
-            paddingTop: "1.3rem",
-            position: "relative",
-            border: darkMode ? "" : "1px solid grey"
+            border: darkMode ? "" : "1px solid grey",
           }
         }
       >
-        <textarea className="card-title"
+        <textarea className="card-title edit-list-input"
           style={
             {
-              fontFamily: '\'Inter\'',
-              fontStyle: 'normal',
-              fontWeight: '700',
-              fontSize: '16px',
-              width: "inherit",
-              border: "0px",
-              resize: "none",
-              letterSpacing: '1px',
+              ...style,
               color: darkMode ? '#FFFFFF' : "#242731",
               background: darkMode ? '#242731' : "#c9c9c9",
-              outline: "none",
               // paddingBottom: "1.0rem"
             }
           }
+          placeholder={placeholder}
           value={state?.title}
           onChange={e => {
             setState(p => ({ ...p, title: e.target.value }));

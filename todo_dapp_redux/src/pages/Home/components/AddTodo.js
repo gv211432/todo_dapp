@@ -1,16 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectDarkMode } from '../../../features/state/gobalState';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import OvalBag from "../../../assets/Oval_bag.png";
 import PlusIcon from "../../../assets/plus.png";
 
 
-export default function AddTodo() {
+export default function AddTodo({ list }) {
   const darkMode = useSelector(selectDarkMode);
+  const extra = useSelector(selectExtra);
+  const dispatch = useDispatch();
 
   return (
     <div className="row m-1"
-    style={{maxWidth:"16rem", minWidth:"10rem"}}
+      style={{ maxWidth: "16rem", minWidth: "10rem" }}
     >
       <div className="card-body"
         style={{
@@ -24,6 +26,17 @@ export default function AddTodo() {
             className='me-2 p-2 basic-icons rounded rounded-circle' height={30}
             style={{
               backgroundColor: "#30343d"
+            }}
+            onClick={() => {
+              console.log("Hello");
+              dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
+              dispatch(setExtra({
+                key: "right_data",
+                val: {
+                  type: "add_todo",
+                  data: { list }
+                }
+              }));
             }}
           />
         </div>

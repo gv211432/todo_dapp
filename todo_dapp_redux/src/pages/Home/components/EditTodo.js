@@ -2,7 +2,7 @@ import React from 'react';
 import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
 
-export default function EditTodo({ state, setState }) {
+export default function EditTodo({ state, setState, placeholder, style }) {
   const darkMode = useSelector(selectDarkMode);
 
   return (
@@ -13,6 +13,7 @@ export default function EditTodo({ state, setState }) {
       <div className=""
         style={
           {
+            ...style,
             background: darkMode ? "#191B20" : "#ddd",
             mixBlendMode: 'normal',
             borderRadius: '12px',
@@ -25,6 +26,7 @@ export default function EditTodo({ state, setState }) {
         <textarea
           className="card-title"
           rows={5}
+          placeholder={placeholder}
           style={
             {
               overflowY: "auto",

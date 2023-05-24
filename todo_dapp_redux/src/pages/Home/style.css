@@ -1,0 +1,21 @@
+.edit-list-card {
+  mix-blend-mode: normal;
+  border-radius: 12px;
+  min-height: 4rem;
+  vertical-align: middle;
+  padding-top: 1.3rem;
+  position: relative;
+}
+
+.edit-list-input {
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  width: inherit;
+  border: 0px;
+  resize: none;
+  letter-spacing: 1px;
+  outline: none;
+}

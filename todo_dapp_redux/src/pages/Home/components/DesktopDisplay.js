@@ -4,6 +4,7 @@ import ShowList from './ShowList';
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import { useDispatch, useSelector } from 'react-redux';
 import AddList from './AddList';
+import AddTodo from './AddTodo';
 
 export default function DesktopDisplay() {
   const darkMode = useSelector(selectDarkMode);
@@ -52,9 +53,15 @@ export default function DesktopDisplay() {
               }))}>
                 <ShowList title={list?.list_name} />
               </div>
+              <AddTodo list={list} />
               {list?.data?.map((todo, j) => {
-                return <ShowTodo title={todo?.title} description={todo?.desc} />;
+                return <ShowTodo title={todo?.title} description={todo?.desc}
+                  completed={todo?.done}
+                />;
               })}
+              <br />
+              <br />
+              <br />
             </div>;
           })
         }

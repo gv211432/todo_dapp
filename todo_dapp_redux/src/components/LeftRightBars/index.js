@@ -25,7 +25,7 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
   console.log({ extra });
 
   return (
-    <div style={{ height: "95vh" }}>
+    <div style={{ height: "100vh" }}>
       {/* top blue bar secition */}
       <div className='row bg-primary'
         style={{ height: "1.8rem", textAlign: "center", justifyContent: "center", color: "white" }}>
@@ -86,90 +86,90 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
               <ButtonLeft Icon={HomeIcon} title={"Section 4"} />
             </div>
 
-            <div
+            <center
               className=''
               style={{
                 position: "absolute",
-                width: (extra?.hideLeftBar) ? "75%" : "90%",
+                width: (extra?.hideLeftBar) ? "90%" : "85%",
                 bottom: "1rem",
-                display: "block"
+                display: "block",
+                justifyContent: "center",
+                // border: "1px solid white",
+                // marginLeft:"-0.5rem"
               }}
             >
-              <div
-                className={`${extra?.hideLeftBar ? "d-grid gap-1 mb-2" : "d-sm-grid d-md-none gap-1 mb-2"} ms-2 me-sm-2 text-center`}
-                style={{
-                  margin: "0rem",
-                }}>
-                <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
-                  type="button"
-                  style={{ verticalAlign: "middle" }}>
-                  <span className={!extra?.hideLeftBar ? `d-sm-inline d-md-inline` : `pe-1`}>
-                    $
-                  </span>
-                  <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                    $0.09
-                  </span>
-                </button>
-                <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
-                  type="button" style={{ verticalAlign: "middle" }}>
-                  <span className={!extra?.hideLeftBar ? `d-sm-inline d-md-inline` : `pe-1`}>
-                    Buy
-                  </span>
-                  <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                    XYZ
-                  </span>
-                </button>
-              </div>
-
-              <div
-                className={`${extra?.hideLeftBar ? "d-none" : "d-md-flex mb-3 d-sm-none"} me-sm-2 text-center`}
-                style={{}} >
-                <button
-                  className={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
-                  type="button"
-                  style={{ verticalAlign: "middle", width: "5rem" }}>
-                  <img src={SectionIcon3} alt="SectionIcon3" className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} />
-                  <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                    $0.09
-                  </span>
-                </button>
-                <button
-                  className={`btn btn-sm btn-primary fade-text basic-cards ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2 me-2`}
-                  type="button"
+              <div className='ms-lg-3 ms-md-1 ms-sm-0'>
+                {/* show on left secetion collaspe */}
+                <div
+                  className={`${extra?.hideLeftBar ? "d-grid gap-1 mb-2" : "d-sm-grid d-md-none gap-1 mb-2 ms-2"} me-sm-2 text-center`}
                   style={{
-                    width: "4.5rem",
-                    backgroundColor: "#A3E3FF",
-                    verticalAlign: "middle",
-                    border: "0px",
-                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                    borderRadius: "10px",
-                    color: "#3772FF",
-                    fontFamily: '\'Inter\'',
-                    fontStyle: 'normal',
-                    fontWeight: '600',
-                    fontSize: '14px'
+                    margin: "0rem",
                   }}>
-                  <span
-                    className={!extra?.hideLeftBar ? `d-sm-none d-md-inline me-0` : `d-none`}>
-                    Buy
-                  </span>
-                  <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                    XYZ
-                  </span>
-                </button>
-              </div>
+                  <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
+                    type="button"
+                    style={{ verticalAlign: "middle" }}>
+                    <span className={!extra?.hideLeftBar ? `d-sm-inline d-md-inline` : `pe-1`}>
+                      $
+                    </span>
+                    <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
+                      $0.09
+                    </span>
+                  </button>
+                  <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
+                    type="button" style={{ verticalAlign: "middle" }}>
+                    <span className={!extra?.hideLeftBar ? `d-sm-inline d-md-inline` : `pe-1`}>
+                      Buy
+                    </span>
+                    <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
+                      XYZ
+                    </span>
+                  </button>
+                </div>
 
+                {/* show on left section show */}
+                <div
+                  className={`${extra?.hideLeftBar ? "d-none" : "d-md-flex mb-3 d-sm-none"} me-sm-2 text-center`}
+                  style={{}} >
+                  <button
+                    className={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
+                    type="button"
+                    style={{ verticalAlign: "middle", width: "5rem" }}>
+                    {/* <img src={SectionIcon3} alt="SectionIcon3" className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} /> */}
+                    <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
+                      $0.09
+                    </span>
+                  </button>
+                  <button
+                    className={`btn btn-sm btn-primary fade-text basic-cards 
+                    ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} 
+                    ms-2 me-2 left-bottom-btn`}
+                    type="button"
+                  // style={{
+                  //   backgroundColor: "#A3E3FF",
+                  //   color: "#3772FF",
+                  // }}
+                  >
+                    <span
+                      className={!extra?.hideLeftBar ? `d-sm-none d-md-inline me-0` : `d-none`}>
+                      Buy
+                    </span>
+                    <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
+                      XYZ
+                    </span>
+                  </button>
+                </div>
+              </div>
               {/* rendering language icon and dark mode button */}
               <LangAndDarkBtn
                 LangIcon={LangIcon}
                 MoonIcon={MoonIcon}
                 BlueDotIcon={BlueDotIcon}
               />
-            </div>
+            </center>
           </div>
 
           {/* right main setion */}
-          <div className='col' style={{ height: "93%" }}>
+          <div className='col' style={{ height: "100%" }}>
             {/* top bar main seciton */}
             <div className='row'
               style={{

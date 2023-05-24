@@ -1,15 +1,17 @@
 import React from 'react';
 import PlusIcon from "../../../assets/plus.png";
-import { selectDarkMode } from '../../../features/state/gobalState';
-import { useSelector } from 'react-redux';
+import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function AddList() {
   const darkMode = useSelector(selectDarkMode);
+  const extra = useSelector(selectExtra);
+  const dispatch = useDispatch();
 
   return (
     <div className="row m-1" style={{
       verticalAlign: "middle",
-      maxWidth:"16rem", minWidth:"10rem",
+      maxWidth: "16rem", minWidth: "10rem",
     }} >
       <div className=""
         style={
@@ -30,6 +32,15 @@ export default function AddList() {
             className='me-2 p-2 rounded basic-icons rounded-circle' height={30}
             style={{
               backgroundColor: "#30343d"
+            }}
+            onClick={() => {
+              dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
+              dispatch(setExtra({
+                key: "right_data",
+                val: {
+                  type: "add_list",
+                }
+              }));
             }}
           />
         </div>
