@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function StopAlert({ data }) {
   const darkMode = useSelector(selectDarkMode);
-  console.log({ data });
+  // console.log({ data });
   return (
     <div
       className=''

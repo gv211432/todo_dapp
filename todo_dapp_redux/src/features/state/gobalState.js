@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  ether: null,
+  ether: 0,
   darkMode: false,
 };
 try {
@@ -18,7 +18,7 @@ export const globlaState = createSlice({
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     setEther: (state, action) => {
-      state.ether = action.payload;
+      state.ether += 1;
     },
     setExtra: (state, action) => {
       state[action.payload.key] = action.payload?.val;

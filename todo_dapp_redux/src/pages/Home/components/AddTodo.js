@@ -32,7 +32,6 @@ export default function AddTodo({ list }) {
               backgroundColor: "#30343d"
             }}
             onClick={() => {
-              console.log("Hello");
               dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
               dispatch(setExtra({
                 key: "right_data",

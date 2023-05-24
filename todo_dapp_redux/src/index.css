@@ -53,6 +53,18 @@ body {
   border-radius: 12px;
 }
 
+
+.f-alert {
+  font-family: 'Inter';
+  color: #61626e;
+  border-radius: 20px;
+  font-size: 17px;
+  box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.25);
+  line-height: 10px;
+}
+
 .basic-icons:hover {
   transform: scale(1.2);
   cursor: pointer;

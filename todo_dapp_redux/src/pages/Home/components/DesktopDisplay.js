@@ -11,7 +11,6 @@ export default function DesktopDisplay() {
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
   const todoData = extra?.list_data;
-  console.log({ todoData });
 
   return (
     <div
@@ -38,6 +37,7 @@ export default function DesktopDisplay() {
           todoData?.map((list, i) => {
             return <div
               className=''
+              key={"dd-" + i}
               style={{
                 width: "17rem",
                 margin: "0.1rem",
@@ -55,8 +55,11 @@ export default function DesktopDisplay() {
               </div>
               <AddTodo list={list} />
               {list?.data?.map((todo, j) => {
-                return <ShowTodo title={todo?.title} description={todo?.desc}
+                return <ShowTodo
+                  key={"dd_sub_" + j}
+                  title={todo?.title} description={todo?.desc}
                   completed={todo?.done} index={todo?.index}
+                  listName={list?.list_name}
                 />;
               })}
               <br />

@@ -6,19 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from "framer-motion";
 
-export default function ShowTodo({ title, description, completed, index }) {
+export default function ShowTodo({ title, description, completed, index, listName }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
   const isSelected = useMemo(() => {
     if (extra?.right_data && extra?.right_data?.type === "todo") {
-      console.log("Cheking=>", extra?.right_data);
+      // console.log("Cheking=>", extra?.right_data);
       if (extra?.right_data?.data?.index == index) return true;
     }
     return false;
   }, [extra]);
 
-  console.log({ isSelected });
+  // console.log({ isSelected });
 
   return (
     <motion.div
@@ -60,13 +60,19 @@ export default function ShowTodo({ title, description, completed, index }) {
               dispatch(setExtra({
                 key: "right_data", val: {
                   type: "todo",
-                  data: { title, description, completed, index }
+                  data: {
+                    title,
+                    description,
+                    completed,
+                    index,
+                    listName
+                  }
                 }
               }));
             }}
           />
         </div>
-        <h5 className="card-title text-start" style={
+        <h5 className="card-title text-start me-3" style={
           {
             fontFamily: "'Poppins'",
             fontStyle: "normal",

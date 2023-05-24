@@ -10,6 +10,19 @@ const chain_id_map = new Map([
   ["0xaa36a7", "Sepolia Testnet"],
 ]);
 
+const _ETHER_ = {
+  val: null,
+  get: () => _ETHER_.val,
+  set: (d) => _ETHER_.val = d
+};
+
+window?.ethereum?.on("chainChanged", () => {
+  window.location.reload();
+});
+window?.ethereum?.on("accountsChanged", () => {
+  window.location.reload();
+});
+
 const connetWallet = async () => {
   // this is given contract on BSC testnet
   // const contractAddress = "0xdAF06E9F17C7aF4CD781DA3CdfC9338ffab440cD";
@@ -19,14 +32,8 @@ const connetWallet = async () => {
   const contractAbi = abi.abi;
   try {
     const { ethereum } = window;
-    if (ethereum) {
+    if (ethereum && !_ETHER_.get()) {
       // events on chain change or account change
-      window.ethereum.on("chainChanged", () => {
-        window.location.reload();
-      });
-      window.ethereum.on("accountsChanged", () => {
-        window.location.reload();
-      });
       const chainId = await window.ethereum.request({ method: 'eth_chainId' });
       // alert("Network " + chain_id_map.get(chainId));
       if (!["0xaa36a7"].includes(chainId)) {
@@ -41,17 +48,19 @@ const connetWallet = async () => {
       } else {
 
       }
-      console.log(chain_id_map);
-      console.log("Etherium", window?.ethereum);
+      // console.log(chain_id_map);
+      // console.log("Etherium", window?.ethereum);
       const accounts = await ethereum?.request({
         method: "eth_requestAccounts"
       });
-      console.log({ accounts });
+      // console.log({ accounts });
       const provider = new ethers.BrowserProvider(ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(contractAddress, contractAbi, signer);
       console.log({ provider, signer, contract });
       return { provider, signer, contract, account: accounts[0] };
+    } else if (_ETHER_.get()) {
+      return _ETHER_.get();
     } else {
       return {
         stop: {

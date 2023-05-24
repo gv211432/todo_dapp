@@ -3,7 +3,7 @@ import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
-export default function EditList({ state, setState, placeholder, style }) {
+export default function EditList({ state, setState, placeholder, style, disabled = false }) {
   const darkMode = useSelector(selectDarkMode);
 
   return (
@@ -23,7 +23,9 @@ export default function EditList({ state, setState, placeholder, style }) {
           }
         }
       >
-        <textarea className="card-title edit-list-input"
+        <textarea
+          className="card-title edit-list-input"
+          disabled={disabled}
           style={
             {
               ...style,

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LeftRightBars from '../../components/LeftRightBars';
-import { selectDarkMode, setExtra } from '../../features/state/gobalState';
+import { selectDarkMode, selectEther, setExtra } from '../../features/state/gobalState';
 import { useDispatch, useSelector } from 'react-redux';
 import DesktopDisplay from './components/DesktopDisplay';
 import MobileDisplay from './components/MobileDisplay';
@@ -8,6 +8,7 @@ import connetWallet from '../../helpers/conectWallet';
 import RightSection from './components/RightSection';
 import "./style.css";
 import StopAlert from './components/StopAlert';
+import Alerts from '../../components/Alert';
 
 export default function Section1() {
   const darkMode = useSelector(selectDarkMode);
@@ -24,11 +25,11 @@ export default function Section1() {
       if (e?.contract) {
         const lists = e?.contract ? await e?.contract?.getUserIds() : {};
         const todos = e?.contract ? await e?.contract?.getTodos(e?.signer?.address) : {};
-        console.log("List :", (await lists));
-        console.log("Todos :", (await todos));
+        // console.log("List :", (await lists));
+        // console.log("Todos :", (await todos));
         if (await lists) {
           for (const list of (await lists)) {
-            console.log({ list });
+            // console.log({ list });
           }
         }
         const allTodos = [];
@@ -47,9 +48,9 @@ export default function Section1() {
         }
         dispatch(setExtra({ key: "list_data", val: allTodos }));
         const network = await e?.provider.getNetwork();
-        console.log(network.chainId);
-        console.log(network.name);
-        console.log(network.plugins);
+        // console.log(network.chainId);
+        // console.log(network.name);
+        // console.log(network.plugins);
       } else {
         setStop(e?.stop);
       }
@@ -58,12 +59,17 @@ export default function Section1() {
     }
   };
   useEffect(() => {
-    if (!reqCryptoStarted.current) {
-      reqCryptoStarted.current = true;
-      console.log("Connecting crypto wallet..");
-      connect();
-    }
-  }, []);
+    connect();
+    console.log("Connecting crypto wallet..");
+  }, [useSelector(selectEther)]);
+
+  // useEffect(() => {
+  //   if (!reqCryptoStarted.current) {
+  //     reqCryptoStarted.current = true;
+  //     console.log("Connecting crypto wallet..");
+  //     connect();
+  //   }
+  // }, []);
 
   const mainComponent = () => {
     // console.log({ ether });
@@ -75,6 +81,7 @@ export default function Section1() {
 
   return (<>
     {stop && <StopAlert data={stop} />}
+    <Alerts />
     <LeftRightBars
       mainComponent={mainComponent()}
       rightComponent={<RightSection />}

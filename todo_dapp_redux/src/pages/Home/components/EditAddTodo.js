@@ -3,7 +3,7 @@ import EditList from './EditList';
 import EditTodo from './EditTodo';
 
 export default function EditAddTodo({ state, setState }) {
-  console.log({ addTodoState: state });
+  // console.log({ addTodoState: state });
   return (
     <div className=''>
       <EditList
@@ -15,7 +15,7 @@ export default function EditAddTodo({ state, setState }) {
         state={state}
         setState={setState} />
 
-      <div
+      {/* <div
         style={{ marginBottom: "0.5rem" }}
         className=" d-grid ms-1 me-1 mx-auto" role="group"
         aria-label="Basic checkbox toggle button group">
@@ -24,11 +24,11 @@ export default function EditAddTodo({ state, setState }) {
         <label class="btn f-txt btn-sm btn-outline-success" for="btncheck1"
         // style={{color:"pink"}}
         >Completed</label>
-      </div>
+      </div> */}
 
-      <span className='f-txt ms-2'>
+      {/* <span className='f-txt ms-2'>
         List : {state?.list?.list_name}
-      </span>
+      </span> */}
 
     </div>
   );

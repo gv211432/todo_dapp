@@ -21,8 +21,8 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
 
-  console.log({ darkMode });
-  console.log({ extra });
+  // console.log({ darkMode });
+  // console.log({ extra });
 
   return (
     <div style={{ height: "100vh" }}>
@@ -229,7 +229,7 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
               {/* Right drawer */}
               <motion.div
                 // onBlur={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
-                className='d-lg-none right-drawer bg-warning'
+                className='d-md-none right-drawer bg-warning'
                 animate={{
                   marginRight: extra?.hideRightDrawer ? ["-100%", "-5%"] : ["-2%", "-100%"]
                 }}

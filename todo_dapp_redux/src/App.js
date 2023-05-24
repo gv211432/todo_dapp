@@ -9,11 +9,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Section1 from './pages/Section1';
+import GlobalContext from './context/globalContext';
 config.autoAddCss = false;
 library.add(far, fas);
 
 
 function App() {
+  const [ethereum, setEthereum] = useState(null);
+  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -25,7 +28,13 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (<GlobalContext.Provider
+    value={{
+      ethereum, setEthereum
+    }}
+  >
+    <RouterProvider router={router} />;
+  </GlobalContext.Provider>);
 }
 
 export default App;
