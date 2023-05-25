@@ -79,13 +79,18 @@ export default function Section1() {
     </>;
   };
 
-  return (<>
+  return (<div
+    style={{
+      width: "100%",
+      height: "100vh"
+    }}
+  >
     {stop && <StopAlert data={stop} />}
     <Alerts />
     <LeftRightBars
       mainComponent={mainComponent()}
       rightComponent={<RightSection />}
     />
-  </>
+  </div>
   );
 };

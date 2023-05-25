@@ -129,6 +129,13 @@ body {
   -moz-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
 }
 
+
+.right-drawer {
+  box-shadow: -7px 10px 59px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -7px 10px 59px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -7px 10px 59px 0px rgba(0, 0, 0, 0.75);
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 0.7rem;
@@ -167,4 +174,7 @@ body {
 
 .btn {
   outline: none;
+}
+.dark-btn{
+  width: 10rem !important;
 }

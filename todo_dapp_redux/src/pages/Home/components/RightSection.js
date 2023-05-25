@@ -267,6 +267,10 @@ export default function RightSection() {
             className={`me-2 p-1 basic-icons ${!darkMode && "img-i"}`}
             height={20}
             style={{}}
+            onClick={() => {
+              dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
+              dispatch(setExtra({ key: "right_data", val: null }));
+            }}
           />
           <span className='txt'
             style={{
@@ -284,11 +288,13 @@ export default function RightSection() {
                       ? "Add Todo" : ""
             }
           </span>
+          <br />
+          <br />
           {/* edit title */}
           {
             (right_data?.type === "todo")
               ? <>
-                <ShowList2 title={state?.listName} />
+                {/* <ShowList2 title={state?.listName} /> */}
                 <EditList state={state} setState={setState} />
                 <EditTodo state={state} setState={setState} />
                 <div
@@ -345,7 +351,7 @@ export default function RightSection() {
                   ? <EditAddList state={state} setState={setState} />
                   : (right_data?.type === "add_todo")
                     ? <>
-                      <ShowList2 title={state?.list?.list_name} />
+                      {/* <ShowList2 title={state?.list?.list_name} /> */}
                       <EditAddTodo state={state} setState={setState} />
                     </>
                     : null

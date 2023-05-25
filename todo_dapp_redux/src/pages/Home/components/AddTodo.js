@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import OvalBag from "../../../assets/Oval_bag.png";
@@ -15,7 +15,7 @@ export default function AddTodo({ list }) {
       animate={{
         scale: [0.7, 1]
       }}
-      className="row m-1"
+      className={`row m-1`}
       style={{ maxWidth: "16rem", minWidth: "10rem" }}
     >
       <div className="card-body"

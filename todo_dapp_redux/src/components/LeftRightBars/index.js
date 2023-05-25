@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NLogo from "../../assets/N_logo.png";
 import CloseIcon from "../../assets/close_icon.png";
@@ -10,7 +10,7 @@ import LangIcon from "../../assets/Language.png";
 import MoonIcon from "../../assets/moon.png";
 import BlueDotIcon from "../../assets/blue_dot.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDarkMode, selectExtra, setExtra } from '../../features/state/gobalState';
+import { selectDarkMode, selectExtra, setExtra, toggelDarkMode } from '../../features/state/gobalState';
 import ButtonLeft from './ButtonLeft';
 import LangAndDarkBtn from '../../pages/Home/components/LangAndDarkBtn';
 import { motion } from "framer-motion";
@@ -20,12 +20,23 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
-
+  const [deleteDrawer, setDeleteDrawer] = useState(true);
+  useEffect(() => {
+    if (extra?.hideRightDrawer) {
+      setDeleteDrawer(false);
+    } else {
+      setTimeout(() => {
+        setDeleteDrawer(true);
+      }, 500);
+    }
+  }, [extra?.hideRightDrawer]);
   // console.log({ darkMode });
   // console.log({ extra });
 
   return (
-    <div style={{ height: "100vh" }}>
+    <div
+      style={{ height: "100vh" }}
+    >
       {/* top blue bar secition */}
       <div className='row bg-primary'
         style={{ height: "1.8rem", textAlign: "center", justifyContent: "center", color: "white" }}>
@@ -62,7 +73,7 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
                   </span>
                 </span>
                 <img
-                  className={`d-sm-none d-md-inline basic-icons ${extra.hideLeftBar && "img-r"} ${darkMode ? "" : "img-i"}`}
+                  className={`d-sm-none d-md-inline basic-icons ${extra?.hideLeftBar && "img-r"} ${darkMode ? "" : "img-i"}`}
                   onClick={() => dispatch(setExtra({ key: "hideLeftBar", val: !extra?.hideLeftBar }))}
                   src={CloseIcon} alt="arrow"
                 />
@@ -179,7 +190,7 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
               }}>
               <div className='container text-start d-sm-none'>
                 <img
-                  className={`d-sm-none d-md-inline basic-icons ${extra?.hideDrawer && "img-r"} ${darkMode ? "" : "img-i"}`}
+                  className={`d-sm-none d-md-inline basic-icons ${!extra?.hideDrawer && "img-r"} ${darkMode ? "" : "img-i"}`}
                   onClick={() => dispatch(setExtra({ key: "hideDrawer", val: !extra?.hideDrawer }))}
                   src={CloseIcon} alt="arrow"
                 />
@@ -189,30 +200,32 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
               <motion.div
                 className='d-sm-none left-drawer'
                 animate={{
-                  marginLeft: extra?.hideDrawer ? ["-100%", "-5%"] : ["-2%", "-100%"]
+                  marginLeft: extra?.hideDrawer ? ["-120%", "-5%"] : ["-2%", "-120%"],
+                  // display: extra?.hideDrawer ? ["none", "", "", "", ""] : ["", "", "", "", "none"],
                 }}
                 transition={{
                   type: "spring",
-                  duration: 0.2
+                  duration: 0.4
                 }}
                 style={{
                   position: "absolute",
                   height: "100vh",
-                  width: "85%",
+                  width: "100%",
                   left: "0",
                   zIndex: "2",
-                  backgroundColor: "#eee",
+                  backgroundColor: darkMode ? "#1E1E1E" : "#eee",
                   marginLeft: "0rem",
-
                 }}>
 
-                <div class="d-grid gap-2" style={{
-                  marginLeft: "10px",
-                  textAlign: "start"
-                }}>
+                <div className="d-grid gap-2"
+                  style={{
+                    marginLeft: "10px",
+                    // width: "85%",
+                    textAlign: "start"
+                  }}>
                   <div className='container text-end'>
                     <img
-                      className={`d-sm-none d-md-inline basic-icons ${extra?.hideDrawer && "img-r"} ${darkMode ? "" : "img-i"}`}
+                      className={`d-sm-none d-md-inline basic-icons ${!extra?.hideDrawer && "img-r"} ${darkMode ? "" : "img-i"}`}
                       onClick={() => dispatch(setExtra({ key: "hideDrawer", val: !extra?.hideDrawer }))}
                       src={CloseIcon} alt="arrow"
                     />
@@ -222,6 +235,90 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
                   <ButtonLeft Icon={SectionIcon2} title={"Section 2"} show />
                   <ButtonLeft Icon={SectionIcon3} title={"Section 3"} show />
                   <ButtonLeft Icon={HomeIcon} title={"Section 4"} show />
+                  <center
+                    className=''
+                    style={{
+                      position: "absolute",
+                      width: (extra?.hideLeftBar) ? "90%" : "85%",
+                      bottom: "1rem",
+                      display: "block",
+                      justifyContent: "center",
+                      // border: "1px solid white",
+                      // marginLeft:"-0.5rem"
+                    }}
+                  >
+                    {/* rendering language icon and dark mode button */}
+                    <div className='row mb-3'>
+                      <div className='col-4'>
+                        <button
+                          className={`btn btn-sm btn-primary fade-text`}
+                          type="button"
+                          style={{ verticalAlign: "middle", width: "5rem" }}>
+                          {/* <img src={SectionIcon3} alt="SectionIcon3" className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} /> */}
+                          <span className={extra?.hideLeftBar ? `d-md-inline` : ``}>
+                            $0.09
+                          </span>
+                        </button>
+                      </div>
+                      <div className='col-4'>
+                        <button
+                          className={`btn btn-sm btn-primary fade-text basic-cards 
+                            ms-2 left-bottom-btn`}
+                          type="button"
+                        >
+                          <span
+                            className={!extra?.hideLeftBar ? `d-md-inline me-0` : ``}>
+                            Buy
+                          </span>
+                          <span className={!extra?.hideLeftBar ? `d-md-inline` : ``}>
+                            XYZ
+                          </span>
+                        </button>
+                      </div>
+                      <div className='col-5'
+                        style={{
+                          // border: "1px solid black",
+                          width: "6rem",
+                          // paddingBottom: "1rem"
+                        }}
+                      >
+                        <span
+                          className='p-1 mb-5 dark-btn'
+                          style={{
+                            backgroundColor: darkMode ? "#353945" : "#ccc",
+                            borderRadius: "20px",
+                            marginBottom: "-7rem",
+                            verticalAlign: "middle",
+                          }}>
+
+                          <img src={MoonIcon}
+                            height={18} width={18}
+                            style={{ margin: "-0.4rem -0.2rem auto 0.2rem" }}
+                            alt="home"
+                            className=''
+                          />
+                          <img src={BlueDotIcon}
+                            height={37} width={37}
+                            alt="home"
+                            className={darkMode
+                              ? "basic-icons dark-btn-on"
+                              : "basic-icons dark-btn-off"}
+                            onClick={() => {
+                              window.localStorage.setItem("darkmode", darkMode ? "0" : "1");
+                              dispatch(toggelDarkMode());
+                            }}
+                          />
+                        </span>
+                      </div>
+                      <div className='col-1 mb-2 ms-2'>
+                        <img src={LangIcon} height={26} width={26}
+                          alt="home"
+                          className={"basic-icons me-2 "}
+                          style={{ marginBottom: "-0.5rem" }}
+                        />
+                      </div>
+                    </div>
+                  </center>
                 </div>
 
               </motion.div>
@@ -229,40 +326,58 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
               {/* Right drawer */}
               <motion.div
                 // onBlur={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
-                className='d-md-none right-drawer bg-warning'
+                className={`${deleteDrawer ? "d-none" : ""} d-sm-none right-drawer`}
                 animate={{
-                  marginRight: extra?.hideRightDrawer ? ["-100%", "-5%"] : ["-2%", "-100%"]
+                  marginRight: extra?.hideRightDrawer ? ["-120%", "-5%"] : ["-2%", "-120%"],
                 }}
                 transition={{
                   type: "spring",
-                  duration: 0.2
+                  duration: 0.4,
                 }}
                 style={{
                   position: "absolute",
                   height: "100vh",
-                  width: "90%",
+                  width: "100%",
                   right: "0",
                   zIndex: "2",
-                  backgroundColor: "#eee",
+                  backgroundColor: darkMode ? "#1E1E1E" : "#eee",
                   marginRight: "0rem",
                 }}>
 
-                <div class="d-grid gap-2" style={{
+                <div class="" style={{
                   marginRight: "10px",
-                  textAlign: "start"
+                  textAlign: "start",
+                  position: "relative"
                 }}>
-                  <div className='container text-end'>
+                  {/* <div
+                    style={{
+                      position: "absolute",
+                      zIndex: 10,
+                      // border: "1px solid black",
+                      right: "0rem"
+                    }}
+                    className='text-end'>
                     <img
+                      // style={{ marginBottom: "-5rem", zIndex:60 }}
                       className={`d-sm-inline basic-icons ${extra?.hideRightDrawer && "img-r"} ${darkMode ? "" : "img-i"}`}
                       onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
                       src={CloseIcon} alt="arrow"
                     />
+                  </div> */}
+                  <div
+                    className={""}
+                    style={{
+                      // height: "120%",
+                      // marginTop: "-2.9rem",
+                      backgroundColor: darkMode ? "#1E1E1E" : "#eee",
+                      // borderLeft: darkMode ? "5px solid #242731" : "5px solid #888888",
+                    }}>
+                    {rightComponent}
                   </div>
-
                 </div>
               </motion.div>
-
             </div>
+
             <div className='row' style={{ height: "100%" }}>
               {/* main of main right section */}
               <div className='col-lg-9 col-md-8 col-sm-12' style={{
