@@ -5,8 +5,10 @@ import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/g
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from "framer-motion";
+import { Tooltip } from 'react-tooltip';
 
-export default function ShowTodo({ title, description, completed, index, listName }) {
+export default function ShowTodo({ title, description, completed,
+  index, listName, i, j }) {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
@@ -50,8 +52,13 @@ export default function ShowTodo({ title, description, completed, index, listNam
         >
         </div> */}
         <div style={{ position: "absolute", right: "0.3rem", top: "0.4rem" }} >
+          <Tooltip anchorSelect={`.${i}_${j}`}
+            place="top">
+            Edit list
+          </Tooltip>
           <img src={EditPen} alt="oval_bag"
-            className='me-2 rounded rounded-circle basic-icons' height={30}
+            className={`me-2 rounded rounded-circle basic-icons ${i}_${j}`}
+            height={30}
             style={{
               backgroundColor: "#30343d"
             }}
@@ -82,7 +89,10 @@ export default function ShowTodo({ title, description, completed, index, listNam
             color: darkMode ? "#fff" : "#444549",
           }
         }>
-          <img src={OvalBag} alt="oval_bag" className='me-2' height={30} />
+          <img
+            src={OvalBag} alt="oval_bag"
+            className='me-2' height={30}
+          />
           <span className='ps-1'>
             {title}
           </span>

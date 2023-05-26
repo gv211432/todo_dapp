@@ -25,14 +25,6 @@ export default function MobileDisplay() {
         height: "100%"
       }}
     >
-      {/* <ShowList />
-      <AddTodo />
-      <ShowTodo />
-      <ShowTodo />
-      <ShowTodo />
-      <ShowTodo />
-      <ShowTodo /> */}
-
       {
         todoData?.map((list, i) => {
           return <div
@@ -65,6 +57,11 @@ export default function MobileDisplay() {
         })
       }
       <AddList />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

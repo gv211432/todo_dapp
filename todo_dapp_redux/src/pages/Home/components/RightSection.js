@@ -231,21 +231,40 @@ export default function RightSection() {
       }}
     >
       Please select todos to show here!
+      <div className='container text-center d-md-none'>
+        <FontAwesomeIcon
+          onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: false }))}
+          style={{
+            marginTop: "14rem",
+            border: "1px solid grey"
+          }}
+          className='p-2 basic-icons rounded rounded-circle img-r'
+          icon={"arrow-right"}
+          height={50}
+        />
+      </div>
       {extra?.waiting && <center
         style={{
           position: "absolute",
-          bottom: "1rem",
+          bottom: "0.5rem",
           width: "100%",
+          marginLeft: "-1rem"
           // justifyContent:"center"
         }}
       >
-        <div class="spinner-border text-primary"
+        {extra?.right_data ? <><div class="spinner-border text-danger"
           role="status">
           <span class="visually-hidden">Loading...</span>
         </div><br />
-        <span className='f-txt'>
-          Pending transaction...
-        </span>
+          <span className='f-txt'>
+            Pending transaction...
+          </span></> : <><div class="spinner-border text-success"
+            role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div><br />
+          <span className='f-txt'>
+            Processing transaction...
+          </span></>}
       </center>}
     </div>
       : <div className='container text-start pt-2'
@@ -377,16 +396,23 @@ export default function RightSection() {
             position: "absolute",
             bottom: "1rem",
             width: "100%",
+            marginLeft: "-1rem"
             // justifyContent:"center"
           }}
         >
-          <div class="spinner-border text-primary"
+          {extra?.right_data ? <><div class="spinner-border text-danger"
             role="status">
             <span class="visually-hidden">Loading...</span>
           </div><br />
-          <span className='f-txt'>
-            Pending transaction...
-          </span>
+            <span className='f-txt'>
+              Pending transaction...
+            </span></> : <><div class="spinner-border text-success"
+              role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div><br />
+            <span className='f-txt'>
+              Processing transaction...
+            </span></>}
         </center>}
       </div>
   );

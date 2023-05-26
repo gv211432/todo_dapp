@@ -60,6 +60,7 @@ export default function DesktopDisplay() {
                   title={todo?.title} description={todo?.desc}
                   completed={todo?.done} index={todo?.index}
                   listName={list?.list_name}
+                  i={i} j={j}
                 />;
               })}
               <br />

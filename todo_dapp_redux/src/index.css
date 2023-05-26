@@ -7,6 +7,7 @@ body {
   overflow: hidden;
 }
 
+/* ====== for left setion buttons ========= */
 .fade-text {
   font-family: 'Inter';
   color: #808191;
@@ -24,6 +25,13 @@ body {
   color: #fff
 }
 
+.fade-text-selected {
+  background: #353945;
+  mix-blend-mode: normal;
+  border-radius: 12px;
+  color: #fff
+}
+
 .fade-text-light {
   font-family: 'Inter';
   color: #808191;
@@ -31,14 +39,25 @@ body {
 }
 
 .fade-text-light:hover {
-  border: 1px solid #35394566;
-  background: #ddd;
+  border: 1px solid #4b505e51;
+  background: #dddddde1;
   mix-blend-mode: normal;
   border-radius: 12px;
   color: #353945d9;
   font-weight: 600;
 }
 
+.fade-text-light-selected {
+  border: 1px solid #4b505e51;
+  background: #dddddde1;
+  mix-blend-mode: normal;
+  border-radius: 12px;
+  color: #353945d9;
+  font-weight: 600;
+}
+
+
+/* any text with inter style and moderate weight */
 .txt {
   font-family: 'Inter';
   font-style: normal;
@@ -47,24 +66,26 @@ body {
   line-height: 24px;
 }
 
+/* style of for text on alert comes up when metamask
+not installe */
 .f-txt {
   font-family: 'Inter';
   color: #808191;
   border-radius: 12px;
 }
 
-
 .f-alert {
   font-family: 'Inter';
   color: #61626e;
   border-radius: 20px;
-  font-size: 17px;
+  font-size: 14px;
   box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.25);
   line-height: 10px;
 }
 
+/* all icons with basic animation */
 .basic-icons:hover {
   transform: scale(1.2);
   cursor: pointer;
@@ -75,6 +96,8 @@ body {
   cursor: pointer;
 }
 
+/* these animations of the dark button
+are not working!! anyway keep it for reference */
 /* The animation code */
 @keyframes toggleon {
   from {
@@ -113,22 +136,24 @@ body {
   animation-fill-mode: forwards;
 }
 
+/* this inverts img on darkmode on */
 .img-i {
   -webkit-filter: invert(1);
   filter: invert(1);
 }
 
+/* all reverse the arrow buttons 180 deg */
 .img-r {
   rotate: 180deg;
   color: #8585855a;
 }
 
+/* left drawer shadow */
 .left-drawer {
   box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 6px 1px 43px -3px rgba(0, 0, 0, 0.75);
 }
-
 
 .right-drawer {
   box-shadow: -7px 10px 59px 0px rgba(0, 0, 0, 0.75);
@@ -136,6 +161,8 @@ body {
   -moz-box-shadow: -7px 10px 59px 0px rgba(0, 0, 0, 0.75);
 }
 
+
+/* ======= Styling the scroll bars ====== */
 /* width */
 ::-webkit-scrollbar {
   width: 0.7rem;
@@ -160,6 +187,7 @@ body {
   width: 1rem;
 }
 
+/* buttons on the left drawer bottom ones */
 .left-bottom-btn {
   width: "4.5rem";
   vertical-align: "middle";
@@ -175,6 +203,26 @@ body {
 .btn {
   outline: none;
 }
-.dark-btn{
+
+.dark-btn {
   width: 10rem !important;
+}
+
+/* to make any text bright blue and bold */
+.blue-txt {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  /* identical to box height, or 123% */
+  text-align: center;
+  letter-spacing: 0.240494px;
+  /* Buffer blue  */
+  color: #3772FF;
+}
+
+/* tooltips */
+.tooltip {
+  z-index: 100000 !important;
 }

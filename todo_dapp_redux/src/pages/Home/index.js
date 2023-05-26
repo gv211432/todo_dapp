@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LeftRightBars from '../../components/LeftRightBars';
-import { selectDarkMode, selectEther, setExtra } from '../../features/state/gobalState';
+import { selectDarkMode, selectEther, selectExtra, setExtra } from '../../features/state/gobalState';
 import { useDispatch, useSelector } from 'react-redux';
 import DesktopDisplay from './components/DesktopDisplay';
 import MobileDisplay from './components/MobileDisplay';
@@ -10,17 +10,22 @@ import "./style.css";
 import StopAlert from './components/StopAlert';
 import Alerts from '../../components/Alert';
 
-export default function Section1() {
+export default function HomePage() {
   const darkMode = useSelector(selectDarkMode);
   const dispatch = useDispatch();
   const reqCryptoStarted = useRef(false);
   // const ether = useSelector(selectEther);
   const [ether, setEther] = useState(null);
   const [stop, setStop] = useState(null);
+  const extra = useSelector(selectExtra);
+  useEffect(() => {
+    console.log({ extra });
+  }, [extra]);
 
   const connect = async () => {
     try {
       const e = await connetWallet(); // ehterium connection
+      console.log(await e);
       setEther(e);
       if (e?.contract) {
         const lists = e?.contract ? await e?.contract?.getUserIds() : {};
@@ -47,10 +52,10 @@ export default function Section1() {
           }
         }
         dispatch(setExtra({ key: "list_data", val: allTodos }));
-        const network = await e?.provider.getNetwork();
-        // console.log(network.chainId);
-        // console.log(network.name);
-        // console.log(network.plugins);
+        dispatch(setExtra({ key: "balance", val: e.balance }));
+        dispatch(setExtra({ key: "network", val: { name: e?.netwrok?.name } }));
+        dispatch(setExtra({ key: "block", val: e.blockNo }));
+        dispatch(setExtra({ key: "account", val: e.account }));
       } else {
         setStop(e?.stop);
       }
@@ -61,6 +66,7 @@ export default function Section1() {
   useEffect(() => {
     connect();
     console.log("Connecting crypto wallet..");
+    dispatch(setExtra({ key: "d_button", val: "Home" }));
   }, [useSelector(selectEther)]);
 
   // useEffect(() => {

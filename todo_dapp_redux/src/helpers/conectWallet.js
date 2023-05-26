@@ -10,6 +10,12 @@ const chain_id_map = new Map([
   ["0xaa36a7", "Sepolia Testnet"],
 ]);
 
+const chain_id_contract_map = new Map([
+  ["0x61", "0xdAF06E9F17C7aF4CD781DA3CdfC9338ffab440cD"],
+  ["0x13881", "0x17B73668B91510CaF0F9CD0594264E6684ee0f06"],
+  ["0xaa36a7", "0x70656706F595FC28D95830114bB9D1618847693F"],
+]);
+
 const _ETHER_ = {
   val: null,
   get: () => _ETHER_.val,
@@ -17,18 +23,21 @@ const _ETHER_ = {
 };
 
 window?.ethereum?.on("chainChanged", () => {
-  window.location.reload();
+  window.location = window.location.origin;
 });
 window?.ethereum?.on("accountsChanged", () => {
-  window.location.reload();
+  window.location = window.location.origin;
 });
 
 const connetWallet = async () => {
   // this is given contract on BSC testnet
   // const contractAddress = "0xdAF06E9F17C7aF4CD781DA3CdfC9338ffab440cD";
-
+  // this is given for polygons mumbai testnet
+  // const contractMumbai = "0x17B73668B91510CaF0F9CD0594264E6684ee0f06";
   // this is deployed same contract on sapolia ether testnet
-  const contractAddress = "0x70656706F595FC28D95830114bB9D1618847693F";
+  // const contractAddress = "0x70656706F595FC28D95830114bB9D1618847693F";
+
+  let contractAddress = "";
   const contractAbi = abi.abi;
   try {
     const { ethereum } = window;
@@ -36,7 +45,9 @@ const connetWallet = async () => {
       // events on chain change or account change
       const chainId = await window.ethereum.request({ method: 'eth_chainId' });
       // alert("Network " + chain_id_map.get(chainId));
-      if (!["0xaa36a7"].includes(chainId)) {
+
+      // if netwrok is not from specified one
+      if (!Array.from(chain_id_contract_map).map(d => d[0]).includes(chainId)) {
         return {
           stop: {
             msg: <span>
@@ -46,7 +57,7 @@ const connetWallet = async () => {
           }
         };
       } else {
-
+        contractAddress = chain_id_contract_map.get(chainId);
       }
       // console.log(chain_id_map);
       // console.log("Etherium", window?.ethereum);
@@ -57,8 +68,22 @@ const connetWallet = async () => {
       const provider = new ethers.BrowserProvider(ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-      console.log({ provider, signer, contract });
-      return { provider, signer, contract, account: accounts[0] };
+      const balance = await provider.getBalance(accounts[0]);
+      const balanceInEth = ethers.formatEther(balance);
+      const netwrok = await provider.getNetwork();
+      const blockNo = await provider.getBlockNumber();
+      // console.log({ provider, signer, contract });
+      const res = {
+        provider,
+        signer,
+        contract,
+        account: accounts[0],
+        balance: balanceInEth,
+        netwrok,
+        blockNo
+      };
+      _ETHER_.set(res);
+      return res;
     } else if (_ETHER_.get()) {
       return _ETHER_.get();
     } else {

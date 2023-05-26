@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDarkMode, selectExtra, toggelDarkMode } from '../../../features/state/gobalState';
+import { selectDarkMode, selectExtra, setExtra, toggelDarkMode } from '../../../features/state/gobalState';
+import { motion } from 'framer-motion';
 
 export default function LangAndDarkBtn({
   LangIcon,
@@ -16,7 +17,21 @@ export default function LangAndDarkBtn({
       className='text-start d-sm-block d-md-block ms-3 mb-3 text-sm-center'
       style={{ marignTop: "" }} >
       <img src={LangIcon} height={26} width={26}
-        alt="home"
+        alt="language"
+        onClick={() => {
+          dispatch(setExtra({
+            key: "alert", val: {
+              element:
+                <motion.div
+                  animate={{ scale: [0.7, 1] }}
+                  className="alert f-alert alert-primary text-center"
+                  role="alert">
+                  Multiple languages not supported yet!!
+                </motion.div>,
+              time: 3000
+            }
+          }));
+        }}
         className={"basic-icons me-2"}
         style={{ marginTop: "-0.3rem" }}
       />
