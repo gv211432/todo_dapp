@@ -9,62 +9,8 @@ import EditAddTodo from './EditAddTodo';
 import connetWallet from '../../../helpers/conectWallet';
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ShowList from './ShowList';
-import ShowList2 from './ShowList2';
-
-const TransactionSpinner = () => {
-  const extra = useSelector(selectExtra);
-  return (<center
-    style={{
-      position: "absolute",
-      bottom: "0.5rem",
-      width: "100%",
-      marginLeft: "-1rem"
-      // justifyContent:"center"
-    }}
-  >
-    {extra?.right_data ? <><div class="spinner-border text-danger"
-      role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div><br />
-      <span className='f-txt'>
-        Pending transaction...
-      </span></> : <><div class="spinner-border text-success"
-        role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div><br />
-      <span className='f-txt'>
-        Processing transaction...
-      </span></>}
-  </center>);
-};
-
-const DeleteButton = ({ state, setState }) => {
-
-  return (<div
-    style={{ marginBottom: "0.5rem" }}
-    className=" d-grid ms-1 me-1 mx-auto" role="group"
-    aria-label="Basic checkbox toggle button group">
-    <input
-      type="checkbox"
-      class="btn-check"
-      checked={state?.completed}
-      id="btncheck1"
-      onChange={() => {
-        setState(p => ({ ...p, completed: !p?.completed }));
-      }}
-    />
-    <label
-      className="btn f-txt m-1 btn-sm btn-outline-danger"
-      style={{ maxWidth: "30rem", minWidth: "10rem" }}
-      for="btncheck1"
-    // style={{color:"pink"}}
-    >{state?.completed
-      ? "Will be deleted"
-      : "Delete"}
-    </label>
-  </div>);
-};
+import DeleteButtonRight from './DeleteButton';
+import TransactionSpinner from './TransactionSpinner';
 
 export default function RightSection() {
   const darkMode = useSelector(selectDarkMode);
@@ -77,30 +23,53 @@ export default function RightSection() {
     if (right_data?.type === "todo") {
       setState({
         ...right_data?.data,
+        type: right_data?.type,
         title: right_data?.data?.title,
-        body: right_data?.data?.description
+        body: right_data?.data?.description,
+        completed: false,
       });
     } else if (right_data?.type === "list_title") {
       setState({
         ...right_data?.data,
+        type: right_data?.type,
         title: right_data?.data?.list_name,
+        completed: false,
       });
     } else if (right_data?.type === "add_list") {
       setState(p => ({
         ...right_data?.data,
+        type: right_data?.type,
         title: "",
-        body: ""
+        body: "",
+        completed: false,
       }));
     } else if (right_data?.type === "add_todo") {
       setState(p => ({
         ...right_data?.data,
+        type: right_data?.type,
         title: "",
-        body: ""
+        body: "",
+        completed: false,
       }));
     }
   }, [right_data]);
 
   console.log({ right_data, state });
+
+  const missingFieldsAlert = () => {
+    dispatch(setExtra({
+      key: "alert", val: {
+        element:
+          <motion.div
+            animate={{ scale: [0.7, 1] }}
+            className="alert f-alert alert-warning text-center"
+            role="alert">
+            {"Some fields are missing!!"}
+          </motion.div>,
+        time: 3000
+      }
+    }));
+  };
 
   // conditional handling for the todos
   const handleSubmit = async (e) => {
@@ -138,8 +107,9 @@ export default function RightSection() {
             }));
           } catch (error) {
             console.log("Rightsection:", error);
+            dispatch(setExtra({ key: "waiting", val: false }));
           }
-        }
+        } else { missingFieldsAlert(); }
       } else {
         // this block updates the selected todo
         if (state?.listName && state?.title && state?.body && state?.index) {
@@ -175,6 +145,7 @@ export default function RightSection() {
             }));
           } catch (error) {
             console.log("Rightsection:", error);
+            dispatch(setExtra({ key: "waiting", val: false }));
           }
         }
       }
@@ -198,6 +169,7 @@ export default function RightSection() {
           dispatch(setExtra({ key: "waiting", val: false }));
         } catch (error) {
           console.log("Rightsection:", error);
+          dispatch(setExtra({ key: "waiting", val: false }));
           dispatch(setExtra({
             key: "alert", val: {
               element:
@@ -211,7 +183,7 @@ export default function RightSection() {
             }
           }));
         }
-      }
+      } else { missingFieldsAlert(); }
     } else if (right_data?.type === "add_list") {
       // this block adds new lists
       if (state?.title) {
@@ -238,15 +210,15 @@ export default function RightSection() {
               element:
                 <motion.div
                   animate={{ scale: [0.7, 1] }}
-                  className="alert f-alert alert-danger"
+                  className="alert f-alert alert-danger text-center"
                   role="alert">
-                  List Name aleady exist!! Choose other.
+                  {"List Name aleady exist!! or Process stoped!!"}
                 </motion.div>,
               time: 3000
             }
           }));
         }
-      }
+      } else { missingFieldsAlert(); }
     } else if (right_data?.type === "add_todo") {
       // this block add new todo in the blockchain
       if (state?.list?.list_name && state?.title && state?.body) {
@@ -269,9 +241,10 @@ export default function RightSection() {
           dispatch(setExtra({ key: "waiting", val: false }));
           dispatch(setExtra({ key: "right_data", val: null }));
         } catch (error) {
+          dispatch(setExtra({ key: "waiting", val: false }));
           console.log("Rightsection:", error);
         }
-      }
+      } else { missingFieldsAlert(); }
     }
   };
 
@@ -299,7 +272,8 @@ export default function RightSection() {
       </div>
       {extra?.waiting && <TransactionSpinner />}
     </div>
-      : <div className='container text-start pt-2'
+      :
+      <div className='container text-start pt-2'
         style={{
           position: "relative",
           marginLeft: "-0.5rem",
@@ -343,22 +317,22 @@ export default function RightSection() {
           <br />
           {/* edit title */}
           {
-            (right_data?.type === "todo")
+            (state?.type === "todo")
               ? <>
                 {/* Show when any todo edit icon is clicked */}
                 <EditList state={state} setState={setState} />
                 <EditTodo state={state} setState={setState} />
-                <DeleteButton state={state} setState={setState} />
+                <DeleteButtonRight state={state} setState={setState} />
               </>
-              : (right_data?.type === "list_title")
+              : (state?.type === "list_title")
                 ? <>
                   {/* show when list title is clicked */}
                   <EditList state={state} setState={setState} disabled={true} />
-                  <DeleteButton state={state} setState={setState} />
-                </> : (right_data?.type === "add_list")
+                  <DeleteButtonRight state={state} setState={setState} />
+                </> : (state?.type === "add_list")
                   // show when add todo plus icon is clicked
                   ? <EditAddList state={state} setState={setState} />
-                  : (right_data?.type === "add_todo")
+                  : (state?.type === "add_todo")
                     ? <>
                       {/* <ShowList2 title={state?.list?.list_name} /> */}
                       <EditAddTodo state={state} setState={setState} />
@@ -376,14 +350,12 @@ export default function RightSection() {
                 marginTop: "1rem",
               }}
               onClick={e => {
-                console.log("Submit...");
                 handleSubmit(e);
               }}
             >{"Save"}
             </button>
           </center>
         </div>
-
         {extra?.waiting && <TransactionSpinner />}
       </div>
   );

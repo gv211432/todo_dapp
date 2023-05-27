@@ -14,7 +14,6 @@ export default function EditAddTodo({ state, setState }) {
         placeholder={"Description"}
         state={state}
         setState={setState} />
-
       {/* <div
         style={{ marginBottom: "0.5rem" }}
         className=" d-grid ms-1 me-1 mx-auto" role="group"

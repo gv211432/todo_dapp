@@ -14,13 +14,18 @@ import { ethers } from 'ethers';
 export default function HomePage() {
   const darkMode = useSelector(selectDarkMode);
   const dispatch = useDispatch();
-  const reqCryptoStarted = useRef(false);
+  const waitingRef = useRef(false);
   // const ether = useSelector(selectEther);
   const [ether, setEther] = useState(null);
   const [stop, setStop] = useState(null);
   const extra = useSelector(selectExtra);
   useEffect(() => {
     console.log({ extra });
+    if (extra?.waiting) {
+      waitingRef.current = setTimeout(() => dispatch(setExtra({ key: "waiting", val: false })), 30000);
+    } else {
+      clearTimeout(waitingRef.current);
+    }
   }, [extra]);
 
   const connect = async () => {
@@ -28,7 +33,7 @@ export default function HomePage() {
       const e = await connetWallet(); // ehterium connection
       console.log(await e);
       setEther(e);
-      console.log({e});
+      console.log({ e });
       if (e?.stop?.msg) {
         setStop(e?.stop);
       }

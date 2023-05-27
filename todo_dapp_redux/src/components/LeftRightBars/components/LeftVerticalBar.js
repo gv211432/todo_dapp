@@ -27,6 +27,21 @@ export default function LeftVerticalBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleBuy = (e) => {
+    dispatch(setExtra({
+      key: "alert", val: {
+        element:
+          <motion.div
+            animate={{ scale: [0.7, 1] }}
+            className="alert f-alert alert-warning text-center"
+            role="alert">
+            {"Action not supported yet..."}
+          </motion.div>,
+        time: 3000
+      }
+    }));
+  };
+
   return (
     <div className={`d-none d-sm-block col-sm-2 
     ${!extra.hideLeftBar ? "col-md-3 col-lg-2" : "left-fixed-bax"} 
@@ -186,6 +201,7 @@ export default function LeftVerticalBar() {
                 fontSize: "13px",
                 lineHeight: "25px"
               }}
+              onClick={(e) => handleBuy(e)}
             >
               <span
                 className={``}>
@@ -252,6 +268,7 @@ export default function LeftVerticalBar() {
                 fontSize: "13px",
                 lineHeight: "25px"
               }}
+              onClick={(e) => handleBuy(e)}
             >
               <span
                 className={!extra?.hideLeftBar ? `d-sm-none d-md-inline me-0` : `d-none`}>

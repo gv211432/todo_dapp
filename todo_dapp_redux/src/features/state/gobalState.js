@@ -4,6 +4,7 @@ const initialState = {
   ether: 0,
   darkMode: false,
   d_button: "Home",
+  completed: false
 };
 try {
   initialState.darkMode = parseInt(window.localStorage.getItem("darkmode")) || false;
