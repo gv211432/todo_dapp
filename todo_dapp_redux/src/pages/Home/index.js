@@ -9,6 +9,7 @@ import RightSection from './components/RightSection';
 import "./style.css";
 import StopAlert from './components/StopAlert';
 import Alerts from '../../components/Alert';
+import { ethers } from 'ethers';
 
 export default function HomePage() {
   const darkMode = useSelector(selectDarkMode);
@@ -27,7 +28,11 @@ export default function HomePage() {
       const e = await connetWallet(); // ehterium connection
       console.log(await e);
       setEther(e);
-      if (e?.contract) {
+      console.log({e});
+      if (e?.stop?.msg) {
+        setStop(e?.stop);
+      }
+      else if (e?.contract) {
         const lists = e?.contract ? await e?.contract?.getUserIds() : {};
         const todos = e?.contract ? await e?.contract?.getTodos(e?.signer?.address) : {};
         // console.log("List :", (await lists));
@@ -51,14 +56,14 @@ export default function HomePage() {
             });
           }
         }
+        const balance = await e.provider.getBalance(e.account);
+        const balanceInEth = ethers.formatEther(balance);
         dispatch(setExtra({ key: "list_data", val: allTodos }));
-        dispatch(setExtra({ key: "balance", val: e.balance }));
+        dispatch(setExtra({ key: "balance", val: balanceInEth }));
         dispatch(setExtra({ key: "network", val: { name: e?.netwrok?.name } }));
         dispatch(setExtra({ key: "block", val: e.blockNo }));
         dispatch(setExtra({ key: "account", val: e.account }));
         dispatch(setExtra({ key: "net_data", val: e.net_data }));
-      } else {
-        setStop(e?.stop);
       }
     } catch (e) {
       console.log(e);
@@ -67,16 +72,8 @@ export default function HomePage() {
   useEffect(() => {
     connect();
     console.log("Connecting crypto wallet..");
-    dispatch(setExtra({ key: "d_button", val: "Home" }));
+    // dispatch(setExtra({ key: "d_button", val: "Home" }));
   }, [useSelector(selectEther)]);
-
-  // useEffect(() => {
-  //   if (!reqCryptoStarted.current) {
-  //     reqCryptoStarted.current = true;
-  //     console.log("Connecting crypto wallet..");
-  //     connect();
-  //   }
-  // }, []);
 
   const mainComponent = () => {
     // console.log({ ether });

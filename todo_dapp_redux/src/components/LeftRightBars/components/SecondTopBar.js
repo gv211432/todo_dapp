@@ -63,7 +63,7 @@ export default function SecondTopBar() {
           <span
             className={`ex-small`}
           >
-            {parseInt(extra?.balance).toFixed(2)} {extra?.net_data?.symbol}
+            {parseInt(extra?.balance || 0).toFixed(2)} {extra?.net_data?.symbol}
           </span>
           <motion.button
             whileHover={{

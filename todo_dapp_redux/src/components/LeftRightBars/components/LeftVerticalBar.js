@@ -152,12 +152,12 @@ export default function LeftVerticalBar() {
                 }}
                 className='tooltip'
                 anchorSelect=".my-anchor-element" place="top">
-                Coins {extra?.balance}
+                {extra?.net_data?.symbol} {extra?.balance}
               </Tooltip>
               <span className={`my-anchor-element`}
                 style={{ zIndex: 10 }}
               >
-                ${parseInt(extra?.balance).toFixed(2) || ""}
+                ${parseInt(extra?.balance || 0).toFixed(2) || ""}
               </span>
             </motion.button>
             {/* <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
@@ -192,7 +192,7 @@ export default function LeftVerticalBar() {
                 Buy
               </span>
               <span className={""}>
-                {extra?.net_data?.symbol || "XYZ"}
+                {extra?.net_data?.symbol.length > 3 ? extra?.net_data?.symbol.substr(0, 2) + ".." : extra?.net_data?.symbol || "XYZ"}
               </span>
             </motion.button>
           </div>
@@ -231,7 +231,7 @@ export default function LeftVerticalBar() {
               <span
                 className={`my-anchor-element ${!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}`}
               >
-                ${parseInt(extra?.balance).toFixed(2) || ""}
+                ${parseInt(extra?.balance || 0).toFixed(2)}
               </span>
             </motion.button>
             {/* this is XYZ coin button */}
@@ -241,7 +241,7 @@ export default function LeftVerticalBar() {
                 dur: 0.1
               }}
               className={`btn btn-sm col-5 mt-1
-            ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} 
+            ${!extra.hideLeftBar ? "text-lg-middle" : "text-middle"} 
             ms-2 me-2 left-bottom-btn blue-txt`}
               type="button"
               style={{

@@ -136,12 +136,12 @@ export default function LeftDrawer() {
                   }}
                   className='tooltip'
                   anchorSelect=".my-anchor-element" place="top">
-                  Coins {extra?.balance}
+                  {extra?.net_data?.symbol} {extra?.balance}
                 </Tooltip>
                 <span
                   className={`my-anchor-element ${!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}`}
                 >
-                  ${parseInt(extra?.balance).toFixed(2)}
+                  ${parseInt(extra?.balance || 0).toFixed(2)}
                 </span>
               </motion.button>
             </div>

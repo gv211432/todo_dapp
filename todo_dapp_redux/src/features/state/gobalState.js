@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 const initialState = {
   ether: 0,
   darkMode: false,
-  d_button: "Home"
+  d_button: "Home",
 };
 try {
   initialState.darkMode = parseInt(window.localStorage.getItem("darkmode")) || false;

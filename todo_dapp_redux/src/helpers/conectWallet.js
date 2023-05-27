@@ -42,9 +42,11 @@ const _ETHER_ = {
 
 window?.ethereum?.on("chainChanged", () => {
   window.location = window.location.origin;
+  connetWallet();
 });
 window?.ethereum?.on("accountsChanged", () => {
   window.location = window.location.origin;
+  connetWallet();
 });
 
 const connetWallet = async () => {
@@ -65,15 +67,15 @@ const connetWallet = async () => {
       // alert("Network " + chain_id_map.get(chainId));
 
       // if netwrok is not from specified one
-      if (!Array.from(chain_id_contract_map).map(d => d[0]).includes(chainId)) {
-        return {
+      if (!chain_id_contract_map.has(chainId)) {
+        return ({
           stop: {
             msg: <span>
-              The Network {chain_id_contract_map.get(chainId).name} does not have the contrat deployed!
+              The Network does not have the contrat deployed!
               Recommendation: Use Sepolia Testnet or BSC Testnet or Ploygon Mumbait Testnet
             </span>
           }
-        };
+        });
       } else {
         contractAddress = chain_id_contract_map.get(chainId).ac;
       }
