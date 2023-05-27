@@ -40,7 +40,7 @@ export default function DesktopDisplay() {
               key={"dd-" + i}
               style={{
                 width: "17rem",
-                margin: "0.1rem",
+                margin: "0.2rem",
                 height: "100%",
                 overflowY: "auto",
                 overflowX: "hidden"

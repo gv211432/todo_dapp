@@ -16,7 +16,7 @@ export default function AddTodo({ list }) {
         scale: [0.7, 1]
       }}
       className={`row m-1`}
-      style={{ maxWidth: "16rem", minWidth: "10rem" }}
+      style={{ maxWidth: "20rem", minWidth: "10rem" }}
     >
       <div className="card-body"
         style={{

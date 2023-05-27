@@ -13,7 +13,7 @@ import BlueDotIcon from "../../../assets/blue_dot.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra, toggelDarkMode } from '../../../features/state/gobalState';
 import ButtonLeft from './ButtonLeft';
-import LangAndDarkBtn from '../../../pages/Home/components/LangAndDarkBtn';
+import LangAndDarkBtn from './LangAndDarkBtn';
 import { motion } from "framer-motion";
 import { Tooltip } from 'react-tooltip';
 import connetWallet from '../../../helpers/conectWallet';
@@ -170,7 +170,7 @@ export default function LeftDrawer() {
                   Buy
                 </span>
                 <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                  XYZ
+                  {extra?.net_data?.symbol || "XYZ"}
                 </span>
               </motion.button>
             </div>

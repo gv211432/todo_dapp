@@ -11,9 +11,27 @@ const chain_id_map = new Map([
 ]);
 
 const chain_id_contract_map = new Map([
-  ["0x61", "0xdAF06E9F17C7aF4CD781DA3CdfC9338ffab440cD"],
-  ["0x13881", "0x17B73668B91510CaF0F9CD0594264E6684ee0f06"],
-  ["0xaa36a7", "0x70656706F595FC28D95830114bB9D1618847693F"],
+  ["0x61", {
+    name: "BNB Smart Chain Testnet",
+    ac: "0xdAF06E9F17C7aF4CD781DA3CdfC9338ffab440cD",
+    symbol: "BNB",
+    usd: "",
+    erc20: "",
+  }],
+  ["0x13881", {
+    name: "Polygon Mumbai Testnet",
+    ac: "0x17B73668B91510CaF0F9CD0594264E6684ee0f06",
+    symbol: "MATIC",
+    usd: "",
+    erc20: "",
+  }],
+  ["0xaa36a7", {
+    name: "Sepolia Testnet",
+    ac: "0x70656706F595FC28D95830114bB9D1618847693F",
+    symbol: "sETH",
+    usd: "",
+    erc20: "",
+  }],
 ]);
 
 const _ETHER_ = {
@@ -51,13 +69,13 @@ const connetWallet = async () => {
         return {
           stop: {
             msg: <span>
-              {chain_id_map.get(chainId)} does not have the contrat deployed!
-              Recommendation: Use Sepolia Testnet
+              The Network {chain_id_contract_map.get(chainId).name} does not have the contrat deployed!
+              Recommendation: Use Sepolia Testnet or BSC Testnet or Ploygon Mumbait Testnet
             </span>
           }
         };
       } else {
-        contractAddress = chain_id_contract_map.get(chainId);
+        contractAddress = chain_id_contract_map.get(chainId).ac;
       }
       // console.log(chain_id_map);
       // console.log("Etherium", window?.ethereum);
@@ -80,7 +98,8 @@ const connetWallet = async () => {
         account: accounts[0],
         balance: balanceInEth,
         netwrok,
-        blockNo
+        blockNo,
+        net_data: chain_id_contract_map.get(chainId) || {}
       };
       _ETHER_.set(res);
       return res;

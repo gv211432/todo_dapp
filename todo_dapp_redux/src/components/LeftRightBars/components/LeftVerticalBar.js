@@ -13,7 +13,7 @@ import BlueDotIcon from "../../../assets/blue_dot.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra, toggelDarkMode } from '../../../features/state/gobalState';
 import ButtonLeft from './ButtonLeft';
-import LangAndDarkBtn from '../../../pages/Home/components/LangAndDarkBtn';
+import LangAndDarkBtn from './LangAndDarkBtn';
 import { motion } from "framer-motion";
 import { Tooltip } from 'react-tooltip';
 import connetWallet from '../../../helpers/conectWallet';
@@ -174,7 +174,7 @@ export default function LeftVerticalBar() {
                 scale: 1.1,
                 dur: 0.1
               }}
-              className={`btn btn-sm col-5 mt-1
+              className={`btn btn-sm col mt-1
             ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} 
             ms-2 me-2 left-bottom-btn blue-txt`}
               type="button"
@@ -192,7 +192,7 @@ export default function LeftVerticalBar() {
                 Buy
               </span>
               <span className={""}>
-                XYZ
+                {extra?.net_data?.symbol || "XYZ"}
               </span>
             </motion.button>
           </div>
@@ -224,13 +224,9 @@ export default function LeftVerticalBar() {
                 height={20}
                 className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} />
               <Tooltip
-                style={{
-                  background: darkMode ? "" : "#999", position: "absolute",
-                  zIndex: 100
-                }}
-                className='tooltip'
+                className={`tooltip ${!darkMode ? "fade-text-selected" : "fade-text-light-selected "}`}
                 anchorSelect=".my-anchor-element" place="top">
-                Coins {extra?.balance}
+                {extra?.net_data?.symbol} {extra?.balance}
               </Tooltip>
               <span
                 className={`my-anchor-element ${!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}`}
@@ -252,7 +248,7 @@ export default function LeftVerticalBar() {
                 background: '#A3E3FF',
                 borderRadius: '10px',
                 color: "#3772FF",
-                width: "4.4rem",
+                // minWidth: "4.4rem",
                 fontSize: "13px",
                 lineHeight: "25px"
               }}
@@ -262,7 +258,7 @@ export default function LeftVerticalBar() {
                 Buy
               </span>
               <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                XYZ
+                {extra?.net_data?.symbol || "XYZ"}
               </span>
             </motion.button>
           </center>

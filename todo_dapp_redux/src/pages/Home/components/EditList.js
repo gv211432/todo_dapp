@@ -13,7 +13,7 @@ export default function EditList({ state, setState, placeholder, style, disabled
       }}
       className="row m-1" style={{
         verticalAlign: "middle",
-        maxWidth: "16rem", minWidth: "10rem",
+        maxWidth: "30rem", minWidth: "10rem",
       }} >
       <div className="edit-list-card"
         style={

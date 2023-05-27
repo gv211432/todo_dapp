@@ -12,6 +12,60 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ShowList from './ShowList';
 import ShowList2 from './ShowList2';
 
+const TransactionSpinner = () => {
+  const extra = useSelector(selectExtra);
+  return (<center
+    style={{
+      position: "absolute",
+      bottom: "0.5rem",
+      width: "100%",
+      marginLeft: "-1rem"
+      // justifyContent:"center"
+    }}
+  >
+    {extra?.right_data ? <><div class="spinner-border text-danger"
+      role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div><br />
+      <span className='f-txt'>
+        Pending transaction...
+      </span></> : <><div class="spinner-border text-success"
+        role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div><br />
+      <span className='f-txt'>
+        Processing transaction...
+      </span></>}
+  </center>);
+};
+
+const DeleteButton = ({ state, setState }) => {
+
+  return (<div
+    style={{ marginBottom: "0.5rem" }}
+    className=" d-grid ms-1 me-1 mx-auto" role="group"
+    aria-label="Basic checkbox toggle button group">
+    <input
+      type="checkbox"
+      class="btn-check"
+      checked={state?.completed}
+      id="btncheck1"
+      onChange={() => {
+        setState(p => ({ ...p, completed: !p?.completed }));
+      }}
+    />
+    <label
+      className="btn f-txt m-1 btn-sm btn-outline-danger"
+      style={{ maxWidth: "30rem", minWidth: "10rem" }}
+      for="btncheck1"
+    // style={{color:"pink"}}
+    >{state?.completed
+      ? "Will be deleted"
+      : "Delete"}
+    </label>
+  </div>);
+};
+
 export default function RightSection() {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
@@ -243,29 +297,7 @@ export default function RightSection() {
           height={50}
         />
       </div>
-      {extra?.waiting && <center
-        style={{
-          position: "absolute",
-          bottom: "0.5rem",
-          width: "100%",
-          marginLeft: "-1rem"
-          // justifyContent:"center"
-        }}
-      >
-        {extra?.right_data ? <><div class="spinner-border text-danger"
-          role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div><br />
-          <span className='f-txt'>
-            Pending transaction...
-          </span></> : <><div class="spinner-border text-success"
-            role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div><br />
-          <span className='f-txt'>
-            Processing transaction...
-          </span></>}
-      </center>}
+      {extra?.waiting && <TransactionSpinner />}
     </div>
       : <div className='container text-start pt-2'
         style={{
@@ -276,8 +308,8 @@ export default function RightSection() {
       >
         <div
           style={{
-            // border: "1px solid black",
-            maxWidth: "18rem"
+            // border: "1px solid grey",
+            maxWidth: "30rem"
           }}
         >
           <img
@@ -313,60 +345,18 @@ export default function RightSection() {
           {
             (right_data?.type === "todo")
               ? <>
-                {/* <ShowList2 title={state?.listName} /> */}
+                {/* Show when any todo edit icon is clicked */}
                 <EditList state={state} setState={setState} />
                 <EditTodo state={state} setState={setState} />
-                <div
-                  style={{ marginBottom: "0.5rem" }}
-                  className=" d-grid ms-1 me-1 mx-auto" role="group"
-                  aria-label="Basic checkbox toggle button group">
-                  <input
-                    type="checkbox"
-                    class="btn-check"
-                    checked={state?.completed}
-                    id="btncheck1"
-                    onChange={() => {
-                      setState(p => ({ ...p, completed: !p?.completed }));
-                    }}
-                  />
-                  <label
-                    className="btn f-txt m-1 btn-sm btn-outline-danger"
-                    style={{ maxWidth: "15.5rem" }}
-                    for="btncheck1"
-                  // style={{color:"pink"}}
-                  >{state?.completed
-                    ? "Will be deleted"
-                    : "Delete"}
-                  </label>
-                </div>
+                <DeleteButton state={state} setState={setState} />
               </>
               : (right_data?.type === "list_title")
                 ? <>
+                  {/* show when list title is clicked */}
                   <EditList state={state} setState={setState} disabled={true} />
-                  <div
-                    style={{ marginBottom: "0.5rem" }}
-                    className=" d-grid ms-1 me-1 mx-auto" role="group"
-                    aria-label="Basic checkbox toggle button group">
-                    <input
-                      type="checkbox"
-                      class="btn-check"
-                      checked={state?.completed}
-                      id="btncheck1"
-                      onChange={() => {
-                        setState(p => ({ ...p, completed: !p?.completed }));
-                      }}
-                    />
-                    <label
-                      className="btn f-txt m-1 btn-sm btn-outline-danger"
-                      style={{ maxWidth: "15.5rem" }}
-                      for="btncheck1"
-                    // style={{color:"pink"}}
-                    >{state?.completed
-                      ? "Will be deleted"
-                      : "Delete"}
-                    </label>
-                  </div>
+                  <DeleteButton state={state} setState={setState} />
                 </> : (right_data?.type === "add_list")
+                  // show when add todo plus icon is clicked
                   ? <EditAddList state={state} setState={setState} />
                   : (right_data?.type === "add_todo")
                     ? <>
@@ -375,7 +365,10 @@ export default function RightSection() {
                     </>
                     : null
           }
-          <center>
+          <center style={{
+            maxWidth: "30rem",
+            minWidth: "10rem",
+          }}>
             <button
               className={darkMode ? 'btn fade-text' : "btn fade-text-light"}
               style={{
@@ -391,29 +384,7 @@ export default function RightSection() {
           </center>
         </div>
 
-        {extra?.waiting && <center
-          style={{
-            position: "absolute",
-            bottom: "1rem",
-            width: "100%",
-            marginLeft: "-1rem"
-            // justifyContent:"center"
-          }}
-        >
-          {extra?.right_data ? <><div class="spinner-border text-danger"
-            role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div><br />
-            <span className='f-txt'>
-              Pending transaction...
-            </span></> : <><div class="spinner-border text-success"
-              role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div><br />
-            <span className='f-txt'>
-              Processing transaction...
-            </span></>}
-        </center>}
+        {extra?.waiting && <TransactionSpinner />}
       </div>
   );
 }

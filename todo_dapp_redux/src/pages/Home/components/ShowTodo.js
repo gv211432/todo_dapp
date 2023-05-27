@@ -29,7 +29,7 @@ export default function ShowTodo({ title, description, completed,
       }}
       className={`row m-1 ${isSelected ? "show-todos" : ""}`}
       style={{
-        maxWidth: "16rem", minWidth: "10rem",
+        maxWidth: "20rem", minWidth: "10rem",
       }}>
       <div className="card-body"
         style={{
@@ -52,12 +52,13 @@ export default function ShowTodo({ title, description, completed,
         >
         </div> */}
         <div style={{ position: "absolute", right: "0.3rem", top: "0.4rem" }} >
-          <Tooltip anchorSelect={`.${i}_${j}`}
-            place="top">
-            Edit list
-          </Tooltip>
+          {/* <Tooltip
+            className={`tooltip ${!darkMode ? "fade-text-selected" : "fade-text-light-selected "}`}
+            anchorSelect={`.tip-show-todos-${i}-${j}`} place="top">
+            Edit Todo
+          </Tooltip> */}
           <img src={EditPen} alt="oval_bag"
-            className={`me-2 rounded rounded-circle basic-icons ${i}_${j}`}
+            className={`tip-show-todos-${i}-${j} me-2 rounded rounded-circle basic-icons ${i}_${j}`}
             height={30}
             style={{
               backgroundColor: "#30343d"

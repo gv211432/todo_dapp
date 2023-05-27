@@ -41,7 +41,7 @@ export default function RightDrawer({ rightComponent }) {
   return (
     <motion.div
       // onBlur={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
-      className={`${deleteDrawer ? "d-none" : ""} d-sm-none right-drawer`}
+      className={`${deleteDrawer ? "d-none" : ""} d-md-none right-drawer`}
       animate={{
         marginRight: extra?.hideRightDrawer ? ["-120%", "-5%"] : ["-2%", "-120%"],
       }}

@@ -2,6 +2,7 @@ import React from 'react';
 import PlusIcon from "../../../assets/plus.png";
 import { selectDarkMode, selectExtra, setExtra } from '../../../features/state/gobalState';
 import { useDispatch, useSelector } from 'react-redux';
+import { Tooltip } from 'react-tooltip';
 
 export default function AddList() {
   const darkMode = useSelector(selectDarkMode);
@@ -11,7 +12,7 @@ export default function AddList() {
   return (
     <div className="row m-1" style={{
       verticalAlign: "middle",
-      maxWidth: "16rem", minWidth: "10rem",
+      maxWidth: "20rem", minWidth: "10rem",
     }} >
       <div className=""
         style={
@@ -28,8 +29,14 @@ export default function AddList() {
         }
       >
         <div style={{ position: "absolute", right: "0.5rem", top: "1rem" }} >
+          <Tooltip
+            className={`tooltip ${!darkMode ? "fade-text-selected" : "fade-text-light-selected "}`}
+            anchorSelect=".tip-add-list" place="top">
+            Click to add an new Todo List
+          </Tooltip>
           <img src={PlusIcon} alt="oval_bag"
-            className='me-2 p-2 rounded basic-icons rounded-circle' height={30}
+            className='tip-add-list me-2 p-2 rounded basic-icons rounded-circle'
+            height={30}
             style={{
               backgroundColor: "#30343d"
             }}

@@ -13,7 +13,7 @@ export default function ShowList2({ title, ...rest }) {
       rest
       style={{
         verticalAlign: "middle",
-        maxWidth: "16rem", minWidth: "10rem",
+        maxWidth: "20rem", minWidth: "10rem",
       }} >
       <div className=""
         onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}

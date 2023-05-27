@@ -56,6 +56,7 @@ export default function HomePage() {
         dispatch(setExtra({ key: "network", val: { name: e?.netwrok?.name } }));
         dispatch(setExtra({ key: "block", val: e.blockNo }));
         dispatch(setExtra({ key: "account", val: e.account }));
+        dispatch(setExtra({ key: "net_data", val: e.net_data }));
       } else {
         setStop(e?.stop);
       }

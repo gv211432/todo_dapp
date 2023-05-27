@@ -1,3 +1,8 @@
+// ╺┳╸┏━┓╺┳┓┏━┓   ╺┳┓┏━┓┏━┓┏━┓
+//  ┃ ┃ ┃ ┃┃┃ ┃    ┃┃┣━┫┣━┛┣━┛
+//  ╹ ┗━┛╺┻┛┗━┛   ╺┻┛╹ ╹╹  ╹  
+// this file is the origin of the app components mounting.
+
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import HomePage from './pages/Home';
@@ -15,8 +20,8 @@ import StatusPage from './pages/Status';
 config.autoAddCss = false;
 library.add(far, fas);
 
-
 function App() {
+  // this state can be used to share instance of ethers.js
   const [ethereum, setEthereum] = useState(null);
 
   const router = createBrowserRouter([
