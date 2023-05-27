@@ -21,19 +21,17 @@ export default function RightSection() {
 
   useEffect(() => {
     if (right_data?.type === "todo") {
-      setState({
+      setState(p => ({
         ...right_data?.data,
         type: right_data?.type,
         title: right_data?.data?.title,
         body: right_data?.data?.description,
-        completed: false,
-      });
+      }));
     } else if (right_data?.type === "list_title") {
       setState({
         ...right_data?.data,
         type: right_data?.type,
         title: right_data?.data?.list_name,
-        completed: false,
       });
     } else if (right_data?.type === "add_list") {
       setState(p => ({
@@ -41,7 +39,6 @@ export default function RightSection() {
         type: right_data?.type,
         title: "",
         body: "",
-        completed: false,
       }));
     } else if (right_data?.type === "add_todo") {
       setState(p => ({
@@ -49,7 +46,6 @@ export default function RightSection() {
         type: right_data?.type,
         title: "",
         body: "",
-        completed: false,
       }));
     }
   }, [right_data]);
@@ -75,7 +71,7 @@ export default function RightSection() {
   const handleSubmit = async (e) => {
     if (right_data?.type === "todo") {
       // this block updates the todo lists
-      if (state?.completed) {
+      if (state?.on) {
         if (state?.listName && state?.index) {
           try {
             dispatch(setExtra({ key: "waiting", val: true }));
@@ -98,7 +94,7 @@ export default function RightSection() {
                 element:
                   <motion.div
                     animate={{ scale: [0.7, 1] }}
-                    className="alert f-alert alert-success"
+                    className="alert f-alert alert-success text-center"
                     role="alert">
                     Todo deleted Successfully...
                   </motion.div>,
@@ -151,7 +147,7 @@ export default function RightSection() {
       }
     } else if (right_data?.type === "list_title") {
       // this block deletes the lists
-      if (state?.title && state?.completed) {
+      if (state?.title && state?.on) {
         try {
           dispatch(setExtra({ key: "waiting", val: true }));
           const res = await (await connetWallet())?.contract?.removeList(
@@ -258,6 +254,7 @@ export default function RightSection() {
       }}
     >
       Please select todos to show here!
+      {/* back button only show on small screen */}
       <div className='container text-center d-md-none'>
         <FontAwesomeIcon
           onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: false }))}
@@ -322,13 +319,13 @@ export default function RightSection() {
                 {/* Show when any todo edit icon is clicked */}
                 <EditList state={state} setState={setState} />
                 <EditTodo state={state} setState={setState} />
-                <DeleteButtonRight state={state} setState={setState} />
+                <DeleteButtonRight state={state} setState={setState} key={state?.index} />
               </>
               : (state?.type === "list_title")
                 ? <>
                   {/* show when list title is clicked */}
                   <EditList state={state} setState={setState} disabled={true} />
-                  <DeleteButtonRight state={state} setState={setState} />
+                  {/* <DeleteButtonRight state={state} setState={setState} /> */}
                 </> : (state?.type === "add_list")
                   // show when add todo plus icon is clicked
                   ? <EditAddList state={state} setState={setState} />

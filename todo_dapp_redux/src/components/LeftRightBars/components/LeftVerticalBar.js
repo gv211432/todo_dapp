@@ -226,7 +226,7 @@ export default function LeftVerticalBar() {
               whileHover={{
                 scale: 1.1
               }}
-              className={`btn btn-sm col-5 fade-text d-flx 
+              className={`btn btn-sm col-5 fade-text d-flx mt-1
             ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"}
              fade-text-selected`}
               type="button"
@@ -256,7 +256,7 @@ export default function LeftVerticalBar() {
                 scale: 1.1,
                 dur: 0.1
               }}
-              className={`btn btn-sm col-5 mt-1
+              className={`btn btn-sm col-5 mt-2
             ${!extra.hideLeftBar ? "text-lg-middle" : "text-middle"} 
             ms-2 me-2 left-bottom-btn blue-txt`}
               type="button"
