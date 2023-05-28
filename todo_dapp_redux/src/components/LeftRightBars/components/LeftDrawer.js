@@ -170,7 +170,9 @@ export default function LeftDrawer() {
                   Buy
                 </span>
                 <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                  {extra?.net_data?.symbol || "XYZ"}
+                  <span className=''>
+                    {extra?.net_data?.symbol.length > 3 ? extra?.net_data?.symbol.substr(0, 2) + ".." : extra?.net_data?.symbol || "XYZ"}
+                  </span>
                 </span>
               </motion.button>
             </div>

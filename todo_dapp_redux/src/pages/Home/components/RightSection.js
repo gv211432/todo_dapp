@@ -16,9 +16,13 @@ export default function RightSection() {
   const darkMode = useSelector(selectDarkMode);
   const extra = useSelector(selectExtra);
   const dispatch = useDispatch();
+  // this right data contains all the data for right setion vertial bar
+  // you can just set it null if processing is done
   const right_data = useSelector(selectExtra)?.right_data;
+  // any changes made in the right sectio must mutate this state
   const [state, setState] = useState(null);
 
+  // preparign state on right data mutations
   useEffect(() => {
     if (right_data?.type === "todo") {
       setState(p => ({
@@ -89,11 +93,6 @@ export default function RightSection() {
             await res.wait();
             console.log(await res);
             dispatch(setEther());
-            setState(p => ({
-              ...right_data?.data,
-              title: "",
-              body: ""
-            }));
             handleTxComplete();
             dispatch(setExtra({
               key: "alert", val: {
@@ -128,11 +127,6 @@ export default function RightSection() {
             await res.wait();
             console.log(await res);
             dispatch(setEther());
-            setState(p => ({
-              ...right_data?.data,
-              title: "",
-              body: ""
-            }));
             handleTxComplete();
             dispatch(setExtra({
               key: "alert", val: {
@@ -165,11 +159,6 @@ export default function RightSection() {
           await res.wait();
           console.log(await res);
           dispatch(setEther());
-          setState(p => ({
-            ...right_data?.data,
-            title: "",
-            body: ""
-          }));
           handleTxComplete();
         } catch (error) {
           console.log("Rightsection:", error);
@@ -201,11 +190,6 @@ export default function RightSection() {
           await res.wait();
           console.log(await res);
           dispatch(setEther());
-          setState(p => ({
-            ...right_data?.data,
-            title: "",
-            body: ""
-          }));
           handleTxComplete();
         } catch (error) {
           console.log("Rightsection:", error);
@@ -239,11 +223,6 @@ export default function RightSection() {
           await res.wait();
           console.log(await res);
           dispatch(setEther());
-          setState(p => ({
-            ...right_data?.data,
-            title: "",
-            body: ""
-          }));
           handleTxComplete();
           dispatch(setExtra({ key: "right_data", val: null }));
           dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));

@@ -28,6 +28,7 @@ export default function HomePage() {
     }
   }, [extra]);
 
+  // this function must be called to reload the whole app
   const connect = async () => {
     try {
       const e = await connetWallet(); // ehterium connection
@@ -42,11 +43,11 @@ export default function HomePage() {
         const todos = e?.contract ? await e?.contract?.getTodos(e?.signer?.address) : {};
         // console.log("List :", (await lists));
         // console.log("Todos :", (await todos));
-        if (await lists) {
-          for (const list of (await lists)) {
-            // console.log({ list });
-          }
-        }
+        // if (await lists) {
+        //   for (const list of (await lists)) {
+        //     // console.log({ list });
+        //   }
+        // }
         const allTodos = [];
         if (await todos) {
           for (const manyTodos of JSON.parse(JSON.stringify((await todos)))) {
