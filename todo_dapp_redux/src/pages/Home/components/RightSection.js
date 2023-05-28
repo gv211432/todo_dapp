@@ -139,7 +139,7 @@ export default function RightSection() {
                 element:
                   <motion.div
                     animate={{ scale: [0.7, 1] }}
-                    className="alert f-alert alert-success"
+                    className="alert f-alert alert-success text-center"
                     role="alert">
                     Todo Updated Successfully...
                   </motion.div>,
@@ -348,20 +348,24 @@ export default function RightSection() {
                     </>
                     : null
           }
-          <center style={{
-            maxWidth: "30rem",
-            minWidth: "10rem",
-          }}>
+          <center
+            className=" d-grid ms-2 me-2 mx-auto"
+            style={{
+              maxWidth: "30rem",
+              minWidth: "10rem",
+            }}>
             <button
-              className={darkMode ? 'btn fade-text' : "btn fade-text-light"}
+              className={`${darkMode ? 'btn' : "btn"}
+              btn-sm btn-primary `}
               style={{
                 border: "1px solid #666",
-                marginTop: "1rem",
+                borderRadius: "10px",
+                marginTop: "0.5rem",
               }}
               onClick={e => {
                 handleSubmit(e);
               }}
-            >{"Save"}
+            >{state?.on ? "Delete" : "Save"}
             </button>
           </center>
         </div>
