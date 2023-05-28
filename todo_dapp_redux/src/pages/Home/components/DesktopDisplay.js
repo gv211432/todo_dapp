@@ -22,7 +22,7 @@ export default function DesktopDisplay() {
         padding: "0",
         overflowX: "auto",
         overflowY: "hidden",
-        height: "100%"
+        height: "88%"
       }}
     >
       <div
