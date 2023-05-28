@@ -127,18 +127,14 @@ are not working!! anyway keep it for reference */
 
 .dark-btn-on {
   animation-name: toggleon;
-  animation-duration: 0s;
-  animation-play-state: running;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+  margin: 0.2rem auto auto auto;
 }
 
 .dark-btn-off {
   animation-name: toggleoff;
-  animation-duration: 0s;
-  animation-play-state: running;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+  margin: 0.2rem 1.6rem auto -1.6rem;
 }
 
 /* this inverts img on darkmode on */

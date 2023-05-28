@@ -41,7 +41,7 @@ export default function AddList() {
               backgroundColor: "#30343d"
             }}
             onClick={() => {
-              dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
+              dispatch(setExtra({ key: "hideRightDrawer", val: false }));
               dispatch(setExtra({
                 key: "right_data",
                 val: {

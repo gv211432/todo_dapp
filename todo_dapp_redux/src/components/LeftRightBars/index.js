@@ -1,7 +1,7 @@
 import React from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDarkMode } from '../../features/state/gobalState';
+import { selectDarkMode, selectExtra } from '../../features/state/gobalState';
 import LeftDrawer from './components/LeftDrawer';
 import RightDrawer from './components/RightDrawer';
 import TopHorizontalBar from './components/TopHorizontalBar';
@@ -12,6 +12,7 @@ import SecondTopBar from './components/SecondTopBar';
 export default function LeftRightBars({ mainComponent, rightComponent }) {
 
   const darkMode = useSelector(selectDarkMode);
+  const extra = useSelector(selectExtra);
 
   return (
     <div style={{ height: "100vh" }}>
@@ -43,7 +44,7 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
             {/*========== this is middle and right section========== */}
             <div className='row' style={{ height: "100%" }}>
               {/* main of main right section */}
-              <div className='col-lg-9 col-md-8 col-sm-12' style={{
+              <div className={`${extra?.hideRightDrawer ? "col-lg-12 col-md-12" : "col-lg-9 col-md-8"} col-sm-12`} style={{
                 height: "100%",
                 backgroundColor: darkMode ? "#1E1E1E" : "#eee",
               }}>
@@ -51,7 +52,9 @@ export default function LeftRightBars({ mainComponent, rightComponent }) {
               </div>
               {/* right of main right section */}
               <div
-                className='d-none d-md-block d-lg-block col-sm-0 col-md-4 col-lg-3'
+                className={`
+                ${extra?.hideRightDrawer ? "d-none" : "d-md-block"}
+                col-sm-0 col-md-4 col-lg-3`}
                 // className='d-none col'
                 style={{
                   height: "100%",

@@ -15,7 +15,7 @@ export default function ShowTodo({ title, description, completed,
   const isSelected = useMemo(() => {
     if (extra?.right_data && extra?.right_data?.type === "todo") {
       // console.log("Cheking=>", extra?.right_data);
-      if (extra?.right_data?.data?.index == index) return true;
+      if (extra?.right_data?.data?.index?.trim() == index?.trim()) return true;
     }
     return false;
   }, [extra]);
@@ -64,7 +64,10 @@ export default function ShowTodo({ title, description, completed,
               backgroundColor: "#30343d"
             }}
             onClick={() => {
-              dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }));
+              dispatch(setExtra({ key: "hideRightDrawer", val: false }));
+              dispatch(setExtra({
+                key: "right_data", val: null
+              }));
               dispatch(setExtra({
                 key: "right_data", val: {
                   type: "todo",
@@ -90,13 +93,18 @@ export default function ShowTodo({ title, description, completed,
             color: darkMode ? "#fff" : "#444549",
           }
         }>
-          <img
+          <div className='row'>
+            <div className='col-2'>
+              <img src={OvalBag} alt="oval_bag" className='me-2' height={30} />
+            </div>
+            <span className='ps-1 text-start col-8 ms-1'>
+              {title}
+            </span>
+          </div>
+          {/* <img
             src={OvalBag} alt="oval_bag"
             className='me-2' height={30}
-          />
-          <span className='ps-1'>
-            {title}
-          </span>
+          /> */}
         </h5>
         <h6 className="card-subtitle"
           style={

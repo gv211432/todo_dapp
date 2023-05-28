@@ -53,7 +53,7 @@ export default function DesktopDisplay() {
               }))}>
                 <ShowList title={list?.list_name} />
               </div>
-              <AddTodo list={list} />
+              <AddTodo list={list} key={list?.list_name} />
               {list?.data?.map((todo, j) => {
                 return <ShowTodo
                   key={"dd_sub_" + j}

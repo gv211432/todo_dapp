@@ -29,7 +29,7 @@ export default function RightDrawer({ rightComponent }) {
   // this effect generats delay on a state for hiding 
   // and unhiding the drawer
   useEffect(() => {
-    if (extra?.hideRightDrawer) {
+    if (!extra?.hideRightDrawer) {
       setDeleteDrawer(false);
     } else {
       setTimeout(() => {
@@ -43,7 +43,7 @@ export default function RightDrawer({ rightComponent }) {
       // onBlur={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
       className={`${deleteDrawer ? "d-none" : ""} d-md-none right-drawer`}
       animate={{
-        marginRight: extra?.hideRightDrawer ? ["-120%", "-5%"] : ["-2%", "-120%"],
+        marginRight: !extra?.hideRightDrawer ? ["-120%", "-5%"] : ["-2%", "-120%"],
       }}
       transition={{
         type: "spring",

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 export default function TransactionSpinner() {
   const extra = useSelector(selectExtra);
+
   return (<center
     style={{
       position: "absolute",
@@ -13,18 +14,20 @@ export default function TransactionSpinner() {
       // justifyContent:"center"
     }}
   >
-    {extra?.right_data ? <><div class="spinner-border text-danger"
-      role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div><br />
-      <span className='f-txt'>
-        Pending transaction...
-      </span></> : <><div class="spinner-border text-success"
+    {!(extra?.counter > 0)
+      ? <><div class="spinner-border text-danger"
         role="status">
         <span class="visually-hidden">Loading...</span>
       </div><br />
-      <span className='f-txt'>
-        Processing transaction...
-      </span></>}
+        <span className='f-txt'>
+          Pending transaction...
+        </span></>
+      : <><div class="spinner-border text-success"
+        role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div><br />
+        <span className='f-txt'>
+          Processing transaction...
+        </span></>}
   </center>);
 }

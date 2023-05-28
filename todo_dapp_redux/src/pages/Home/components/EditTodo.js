@@ -3,6 +3,9 @@ import { selectDarkMode } from '../../../features/state/gobalState';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
+const MIN_TEXTAREA_HEIGHT = 32;
+const MAX_TEXT_HEIGHT = 120;
+const ALLOWED_CONTENT_LEN = 150;
 export default function EditTodo({ state, setState, placeholder, style }) {
   const darkMode = useSelector(selectDarkMode);
 
@@ -51,6 +54,7 @@ export default function EditTodo({ state, setState, placeholder, style }) {
           }
           value={state?.body}
           onChange={e => {
+            if (e.target?.value?.length > ALLOWED_CONTENT_LEN) return;
             setState(p => ({ ...p, body: e?.target?.value }));
           }}
         ></textarea>

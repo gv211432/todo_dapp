@@ -44,13 +44,18 @@ export default function RightSection() {
       setState(p => ({
         ...right_data?.data,
         type: right_data?.type,
-        title: "",
-        body: "",
+        title: right_data?.data?.title,
+        body: right_data?.data?.description,
       }));
     }
   }, [right_data]);
 
   console.log({ right_data, state });
+
+  const handleTxComplete = () => {
+    dispatch(setExtra({ key: "waiting", val: false }));
+    dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter - 1 : 0 }));
+  };
 
   const missingFieldsAlert = () => {
     dispatch(setExtra({
@@ -76,10 +81,11 @@ export default function RightSection() {
           try {
             dispatch(setExtra({ key: "waiting", val: true }));
             const res = await (await connetWallet())?.contract?.deleteTodo(
-              state.index,
+              state?.index,
               state?.listName
             );
             dispatch(setExtra({ key: "right_data", val: null }));
+            dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));
             await res.wait();
             console.log(await res);
             dispatch(setEther());
@@ -88,7 +94,7 @@ export default function RightSection() {
               title: "",
               body: ""
             }));
-            dispatch(setExtra({ key: "waiting", val: false }));
+            handleTxComplete();
             dispatch(setExtra({
               key: "alert", val: {
                 element:
@@ -103,7 +109,7 @@ export default function RightSection() {
             }));
           } catch (error) {
             console.log("Rightsection:", error);
-            dispatch(setExtra({ key: "waiting", val: false }));
+            handleTxComplete();
           }
         } else { missingFieldsAlert(); }
       } else {
@@ -118,6 +124,7 @@ export default function RightSection() {
               state.body
             );
             dispatch(setExtra({ key: "right_data", val: null }));
+            dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));
             await res.wait();
             console.log(await res);
             dispatch(setEther());
@@ -126,7 +133,7 @@ export default function RightSection() {
               title: "",
               body: ""
             }));
-            dispatch(setExtra({ key: "waiting", val: false }));
+            handleTxComplete();
             dispatch(setExtra({
               key: "alert", val: {
                 element:
@@ -141,7 +148,7 @@ export default function RightSection() {
             }));
           } catch (error) {
             console.log("Rightsection:", error);
-            dispatch(setExtra({ key: "waiting", val: false }));
+            handleTxComplete();
           }
         }
       }
@@ -154,6 +161,7 @@ export default function RightSection() {
             state?.list_name
           );
           dispatch(setExtra({ key: "right_data", val: null }));
+          dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));
           await res.wait();
           console.log(await res);
           dispatch(setEther());
@@ -162,10 +170,10 @@ export default function RightSection() {
             title: "",
             body: ""
           }));
-          dispatch(setExtra({ key: "waiting", val: false }));
+          handleTxComplete();
         } catch (error) {
           console.log("Rightsection:", error);
-          dispatch(setExtra({ key: "waiting", val: false }));
+          handleTxComplete();
           dispatch(setExtra({
             key: "alert", val: {
               element:
@@ -189,6 +197,7 @@ export default function RightSection() {
             state.title,
           );
           dispatch(setExtra({ key: "right_data", val: null }));
+          dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));
           await res.wait();
           console.log(await res);
           dispatch(setEther());
@@ -197,10 +206,10 @@ export default function RightSection() {
             title: "",
             body: ""
           }));
-          dispatch(setExtra({ key: "waiting", val: false }));
+          handleTxComplete();
         } catch (error) {
           console.log("Rightsection:", error);
-          dispatch(setExtra({ key: "waiting", val: false }));
+          handleTxComplete();
           dispatch(setExtra({
             key: "alert", val: {
               element:
@@ -226,6 +235,7 @@ export default function RightSection() {
             state.body
           );
           dispatch(setExtra({ key: "right_data", val: null }));
+          dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));
           await res.wait();
           console.log(await res);
           dispatch(setEther());
@@ -234,15 +244,17 @@ export default function RightSection() {
             title: "",
             body: ""
           }));
-          dispatch(setExtra({ key: "waiting", val: false }));
+          handleTxComplete();
           dispatch(setExtra({ key: "right_data", val: null }));
+          dispatch(setExtra({ key: "counter", val: extra?.couter ? extra?.couter + 1 : 1 }));
         } catch (error) {
-          dispatch(setExtra({ key: "waiting", val: false }));
+          handleTxComplete();
           console.log("Rightsection:", error);
         }
       } else { missingFieldsAlert(); }
     }
   };
+
 
   return (
     !right_data ? <div
@@ -255,9 +267,9 @@ export default function RightSection() {
     >
       Please select todos to show here!
       {/* back button only show on small screen */}
-      <div className='container text-center d-md-none'>
+      <div className='container text-center'>
         <FontAwesomeIcon
-          onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: false }))}
+          onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: true }))}
           style={{
             marginTop: "14rem",
             border: "1px solid grey"
@@ -325,7 +337,7 @@ export default function RightSection() {
                 ? <>
                   {/* show when list title is clicked */}
                   <EditList state={state} setState={setState} disabled={true} />
-                  {/* <DeleteButtonRight state={state} setState={setState} /> */}
+                  <DeleteButtonRight state={state} setState={setState} />
                 </> : (state?.type === "add_list")
                   // show when add todo plus icon is clicked
                   ? <EditAddList state={state} setState={setState} />

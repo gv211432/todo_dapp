@@ -16,7 +16,7 @@ export default function ShowList2({ title, ...rest }) {
         maxWidth: "20rem", minWidth: "10rem",
       }} >
       <div className=""
-        onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: !extra?.hideRightDrawer }))}
+        onClick={() => dispatch(setExtra({ key: "hideRightDrawer", val: false }))}
         style={
           {
             background: darkMode ? '#242731' : "#8585855a",
