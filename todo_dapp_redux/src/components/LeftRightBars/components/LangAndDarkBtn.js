@@ -54,12 +54,15 @@ export default function LangAndDarkBtn({
             alt="home"
             className=''
           />
-          <img src={BlueDotIcon}
+          <motion.img src={BlueDotIcon}
             height={37} width={37}
             alt="home"
-            className={darkMode
-              ? "basic-icons dark-btn-on"
-              : "basic-icons dark-btn-off"}
+            animate={{
+              margin: !darkMode
+                ? ["0.2rem auto auto auto", "0.2rem 1.6rem auto -1.6rem"]
+                : ["0.2rem 1.6rem auto -1.6rem", "0.2rem auto auto auto"]
+            }}
+            className={"basic-icons"}
             onClick={() => {
               window.localStorage.setItem("darkmode", darkMode ? "0" : "1");
               dispatch(toggelDarkMode());

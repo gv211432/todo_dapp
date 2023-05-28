@@ -33,7 +33,7 @@ body {
   background: #353945;
   mix-blend-mode: normal;
   border-radius: 12px;
-  color: #fff
+  color: #fff;
 }
 
 .fade-text-light {
@@ -54,7 +54,7 @@ body {
 .fade-text-light-selected {
   border: 1px solid #4b505e51;
   background: #eaeaea;
-  /* mix-blend-mode: normal; */
+  mix-blend-mode: normal;
   border-radius: 12px;
   color: #353945d9;
   font-weight: 600;

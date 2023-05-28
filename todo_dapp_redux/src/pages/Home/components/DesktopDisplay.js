@@ -16,7 +16,7 @@ export default function DesktopDisplay() {
     <div
       className='d-none d-sm-none d-md-block'
       style={{
-        backgroundColor: darkMode ? "" : "#eee",
+        backgroundColor: darkMode ? "" : "",
         position: "relative",
         margin: "0",
         padding: "0",

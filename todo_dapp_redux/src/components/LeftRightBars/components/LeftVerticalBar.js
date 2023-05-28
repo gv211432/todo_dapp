@@ -128,164 +128,216 @@ export default function LeftVerticalBar() {
           // marginLeft:"-0.5rem"
         }}
       >
-        <div className=''>
-          {/* show on left secetion collaspe */}
-          <div
-            className={`${extra?.hideLeftBar ? "d-grid gap-1 mb-2" : "d-sm-grid d-md-none gap-1 mb-2 ms-2"} me-sm-2 text-center`}
-            style={{
-              margin: "0rem",
-            }}>
-            {/* <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
-            type="button"
-            style={{ verticalAlign: "middle" }}>
-            <span className={!extra?.hideLeftBar ? `d-sm-inline d-md-inline` : `pe-1`}>
-              $
-            </span>
-            <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-              $0.09
-            </span>
-          </button> */}
-            <motion.button
-              animate={{
-                scale: 1.1
-              }}
-              className={`btn btn-sm col-5 fade-text d-flx 
+        {!extra?.hideLeftBar ? <>
+          <div className=''>
+            {/* show on left secetion collaspe */}
+            <div
+              className={`${extra?.hideLeftBar ? "d-grid gap-1 mb-2" : "d-sm-grid d-md-none gap-1 mb-2 ms-2"} me-sm-2 text-center`}
+              style={{
+                margin: "0rem",
+              }}>
+              <motion.button
+                animate={{
+                  scale: 1.1
+                }}
+                className={`btn btn-sm col-5 fade-text d-flx 
             ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"}
              fade-text-selected`}
-              type="button"
-              style={{
-                verticalAlign: "middle",
-                minWidth: "5rem",
-              }}>
-              <img src={NLogo} alt="SectionIcon3"
-                height={20}
-                className={``} />
-              <Tooltip
+                type="button"
                 style={{
-                  background: darkMode ? "" : "#999", position: "absolute",
-                  zIndex: 100
+                  verticalAlign: "middle",
+                  minWidth: "5rem",
+                }}>
+                <img src={NLogo} alt="SectionIcon3"
+                  height={20}
+                  className={``} />
+                <Tooltip
+                  style={{
+                    background: darkMode ? "" : "#999", position: "absolute",
+                    zIndex: 100
+                  }}
+                  className='tooltip'
+                  anchorSelect=".my-anchor-element" place="top">
+                  {extra?.net_data?.symbol} {extra?.balance}
+                </Tooltip>
+                <span className={`my-anchor-element`}
+                  style={{ zIndex: 10 }}
+                >
+                  ${parseInt(extra?.balance || 0).toFixed(2) || ""}
+                </span>
+              </motion.button>
+              <motion.button
+                whileHover={{
+                  scale: 1.1,
+                  dur: 0.1
                 }}
-                className='tooltip'
-                anchorSelect=".my-anchor-element" place="top">
-                {extra?.net_data?.symbol} {extra?.balance}
-              </Tooltip>
-              <span className={`my-anchor-element`}
-                style={{ zIndex: 10 }}
-              >
-                ${parseInt(extra?.balance || 0).toFixed(2) || ""}
-              </span>
-            </motion.button>
-            {/* <button class={`btn btn-sm btn-primary fade-text ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} ms-2`}
-            type="button" style={{ verticalAlign: "middle" }}>
-            <span className={!extra?.hideLeftBar ? `d-sm-inline d-md-inline` : `pe-1`}>
-              Buy
-            </span>
-            <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-              XYZ
-            </span>
-          </button> */}
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                dur: 0.1
-              }}
-              className={`btn btn-sm col mt-1
+                className={`btn btn-sm col mt-1
             ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"} 
             ms-2 me-2 left-bottom-btn blue-txt`}
-              type="button"
-              style={{
-                background: '#A3E3FF',
-                borderRadius: '10px',
-                color: "#3772FF",
-                minWidth: "4.4rem",
-                fontSize: "13px",
-                lineHeight: "25px"
-              }}
-              onClick={(e) => handleBuy(e)}
-            >
-              <span
-                className={``}>
-                Buy
-              </span>
-              <span className={""}>
-                {extra?.net_data?.symbol.length > 3 ? extra?.net_data?.symbol.substr(0, 2) + ".." : extra?.net_data?.symbol || "XYZ"}
-              </span>
-            </motion.button>
-          </div>
+                type="button"
+                style={{
+                  background: '#A3E3FF',
+                  borderRadius: '10px',
+                  color: "#3772FF",
+                  minWidth: "4.4rem",
+                  fontSize: "13px",
+                  lineHeight: "25px"
+                }}
+                onClick={(e) => handleBuy(e)}
+              >
+                <span
+                  className={``}>
+                  Buy
+                </span>
+                <span className={""}>
+                  {extra?.net_data?.symbol.length > 3 ? extra?.net_data?.symbol.substr(0, 2) + ".." : extra?.net_data?.symbol || "XYZ"}
+                </span>
+              </motion.button>
+            </div>
 
-          {/* show on left section show */}
-          <center
-            className={`${extra?.hideLeftBar ? "d-none" : "d-md-block mb-3 d-sm-none"} 
+            {/* show on left section show */}
+            <center
+              className={`${extra?.hideLeftBar ? "d-none" : "d-md-block mb-3 d-sm-none"} 
           row ms-1 text-center`}
-            style={{
-              // border: "1px solid white",
-              width: "110%",
-            }} >
-            {/* this is buy button */}
-            <motion.button
-              whileHover={{
-                scale: 1.1
-              }}
-              className={`btn btn-sm col-5 fade-text d-flx mt-1
+              style={{
+                // border: "1px solid white",
+                width: "110%",
+              }} >
+              {/* this is buy button */}
+              <motion.button
+                whileHover={{
+                  scale: 1.1
+                }}
+                className={`btn btn-sm col-5 fade-text d-flx mt-1
             ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"}
              fade-text-selected`}
-              type="button"
-              style={{
-                verticalAlign: "middle",
-                minWidth: "5.6rem",
-                marginBottom: "-0.3rem",
-                lineHeight: "1.6rem"
-              }}>
-              <img src={NLogo} alt="SectionIcon3"
-                height={20}
-                className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} />
-              <Tooltip
-                className={`tooltip ${!darkMode ? "fade-text-selected" : "fade-text-light-selected "}`}
-                anchorSelect=".my-anchor-element" place="top">
-                {extra?.net_data?.symbol} {extra?.balance}
-              </Tooltip>
-              <span
-                className={`my-anchor-element ${!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}`}
-              >
-                ${parseInt(extra?.balance || 0).toFixed(2)}
-              </span>
-            </motion.button>
-            {/* this is XYZ coin button */}
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                dur: 0.1
-              }}
-              className={`btn btn-sm col-5 mt-2
+                type="button"
+                style={{
+                  verticalAlign: "middle",
+                  minWidth: "5.6rem",
+                  marginBottom: "-0.3rem",
+                  lineHeight: "1.6rem"
+                }}>
+                <img src={NLogo} alt="SectionIcon3"
+                  height={20}
+                  className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} />
+                <Tooltip
+                  className={`tooltip ${!darkMode ? "fade-text-selected" : "fade-text-light-selected "}`}
+                  anchorSelect=".my-anchor-element" place="top">
+                  {extra?.net_data?.symbol} {extra?.balance}
+                </Tooltip>
+                <span
+                  className={`my-anchor-element ${!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}`}
+                >
+                  ${parseInt(extra?.balance || 0).toFixed(2)}
+                </span>
+              </motion.button>
+              {/* this is XYZ coin button */}
+              <motion.button
+                whileHover={{
+                  scale: 1.1,
+                  dur: 0.1
+                }}
+                className={`btn btn-sm col-5 mt-2
             ${!extra.hideLeftBar ? "text-lg-middle" : "text-middle"} 
             ms-2 me-2 left-bottom-btn blue-txt`}
-              type="button"
+                type="button"
+                style={{
+                  background: '#A3E3FF',
+                  borderRadius: '10px',
+                  color: "#3772FF",
+                  // minWidth: "4.4rem",
+                  fontSize: "13px",
+                  lineHeight: "25px"
+                }}
+                onClick={(e) => handleBuy(e)}
+              >
+                <span
+                  className={!extra?.hideLeftBar ? `d-sm-none d-md-inline me-0` : `d-none`}>
+                  Buy
+                </span>
+                <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
+                  {extra?.net_data?.symbol || "XYZ"}
+                </span>
+              </motion.button>
+            </center>
+          </div>
+          {/* rendering language icon and dark mode button */}
+          <LangAndDarkBtn
+            LangIcon={LangIcon}
+            MoonIcon={MoonIcon}
+            BlueDotIcon={BlueDotIcon}
+          />
+        </> : <>
+          <motion.button
+            animate={{
+              scale: 1.1
+            }}
+            className={`btn btn-sm fade-text
+             fade-text-selected mb-2 me-1`}
+            type="button"
+            style={{
+              verticalAlign: "middle",
+              minWidth: "4rem",
+            }}>
+            <img src={NLogo}
+              alt="SectionIcon3"
+              height={18}
               style={{
-                background: '#A3E3FF',
-                borderRadius: '10px',
-                color: "#3772FF",
-                // minWidth: "4.4rem",
-                fontSize: "13px",
-                lineHeight: "25px"
               }}
-              onClick={(e) => handleBuy(e)}
+              className={`me-1`} />
+            <Tooltip
+              className={`tooltip ${!darkMode ? "fade-text-selected " : "fade-text-light-selected "}`}
+              anchorSelect=".balance-left-btn" place="top">
+              {extra?.net_data?.symbol} {extra?.balance}
+            </Tooltip>
+            <span className={`balance-left-btn`}
+              style={{ zIndex: 10 }}
             >
-              <span
-                className={!extra?.hideLeftBar ? `d-sm-none d-md-inline me-0` : `d-none`}>
-                Buy
-              </span>
-              <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                {extra?.net_data?.symbol || "XYZ"}
-              </span>
-            </motion.button>
-          </center>
-        </div>
-        {/* rendering language icon and dark mode button */}
-        <LangAndDarkBtn
-          LangIcon={LangIcon}
-          MoonIcon={MoonIcon}
-          BlueDotIcon={BlueDotIcon}
-        />
+              {parseInt(extra?.balance || 0).toFixed(2) || ""}
+            </span>
+          </motion.button>
+
+          <motion.button
+            whileHover={{
+              scale: 1.1,
+              dur: 0.1
+            }}
+            className={`btn btn-sm mb-2 left-bottom-btn blue-txt`}
+            type="button"
+            style={{
+              background: '#A3E3FF',
+              borderRadius: '10px',
+              color: "#3772FF",
+              minWidth: "4.4rem",
+              marginLeft: "-0.2rem",
+              fontSize: "13px",
+              lineHeight: "25px"
+            }}
+            onClick={(e) => handleBuy(e)}
+          >
+            <Tooltip
+              className={`tooltip ${!darkMode ? "fade-text-selected" : "fade-text-light-selected "}`}
+              anchorSelect=".tip-buy-sym" place="top">
+              Buy {extra?.net_data?.symbol}
+            </Tooltip>
+            <span
+              className={``}>
+              Buy
+            </span>
+            <span className={"tip-buy-sym"}>
+              {extra?.net_data?.symbol.length > 3 ? extra?.net_data?.symbol.substr(0, 2) + ".." : extra?.net_data?.symbol || "XYZ"}
+            </span>
+          </motion.button>
+
+          <div className='ms-2'>
+            <LangAndDarkBtn
+              LangIcon={LangIcon}
+              MoonIcon={MoonIcon}
+              BlueDotIcon={BlueDotIcon}
+            />
+          </div>
+        </>}
       </center>
     </div>
   );

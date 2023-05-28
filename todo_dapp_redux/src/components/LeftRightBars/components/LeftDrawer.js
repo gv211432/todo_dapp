@@ -8,15 +8,12 @@ import SectionIcon2 from "../../../assets/section_2.png";
 import SectionIcon3 from "../../../assets/share.png";
 import LangIcon from "../../../assets/Language.png";
 import MoonIcon from "../../../assets/moon.png";
-import Wallet from "../../../assets/wallet.png";
 import BlueDotIcon from "../../../assets/blue_dot.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDarkMode, selectExtra, setExtra, toggelDarkMode } from '../../../features/state/gobalState';
 import ButtonLeft from './ButtonLeft';
-import LangAndDarkBtn from './LangAndDarkBtn';
 import { motion } from "framer-motion";
 import { Tooltip } from 'react-tooltip';
-import connetWallet from '../../../helpers/conectWallet';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -118,7 +115,6 @@ export default function LeftDrawer() {
                   scale: 1.1
                 }}
                 className={`btn btn-sm col-5 fade-text d-flx 
-                            ${!extra.hideLeftBar ? "text-lg-start" : "text-middle"}
                              fade-text-selected`}
                 type="button"
                 style={{
@@ -129,7 +125,7 @@ export default function LeftDrawer() {
                 }}>
                 <img src={NLogo} alt="SectionIcon3"
                   height={20}
-                  className={!extra.hideLeftBar ? `me-sm-0 me-md-1 me-lg-1` : ``} />
+                />
                 <Tooltip
                   style={{
                     background: darkMode ? "" : "#999", position: "absolute",
@@ -139,7 +135,7 @@ export default function LeftDrawer() {
                   {extra?.net_data?.symbol} {extra?.balance}
                 </Tooltip>
                 <span
-                  className={`my-anchor-element ${!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}`}
+                  className={`my-anchor-element`}
                 >
                   ${parseInt(extra?.balance || 0).toFixed(2)}
                 </span>
@@ -166,13 +162,11 @@ export default function LeftDrawer() {
                 }}
               >
                 <span
-                  className={!extra?.hideLeftBar ? `d-sm-none d-md-inline me-0` : `d-none`}>
+                  className={``}>
                   Buy
                 </span>
-                <span className={!extra?.hideLeftBar ? `d-sm-none d-md-inline` : `d-none`}>
-                  <span className=''>
-                    {extra?.net_data?.symbol.length > 3 ? extra?.net_data?.symbol.substr(0, 2) + ".." : extra?.net_data?.symbol || "XYZ"}
-                  </span>
+                <span className={``}>
+                  {extra?.net_data?.symbol || "XYZ"}
                 </span>
               </motion.button>
             </div>
